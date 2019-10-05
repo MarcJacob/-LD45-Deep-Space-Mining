@@ -1,0 +1,80 @@
+Theme -> Start with nothing.
+
+Survival -> Too complex ? Obvious
+Self replicating system -> Not too complex ? However you need to start with SOMETHING. Pretty hard to make into a fun game.
+Strategy game -> Start with nothing is pretty obvious. Too complex !!
+God game -> Seed life. Complexity creeps around the corner. How to make it fun ? 
+RPG -> Feudalism / Mount & Blade sort of game. Too complex, can be hard to make into something fun.
+
+IDEA # 1 : Space mining capitalism game.
+
+-> You start with nothing (just yourself aboard a station). Need to take a loan to buy your first mining ship and go mine stuff. Then you can employ other miners, fighters to repel pirates, and to fight your competition. 
+Goal is to be the biggest miner ? GDP Mechanic ?
+
+-> One station. You can take a loan to start. You can buy mining ships (bigger / more expensive = better). Go mine in asteroid belt. Reach a certain net worth by selling your shipment.
+
+
+FINAL CONCEPT : 
+
+-> You start with no money, no ship... nothing ! "KICK START" mechanic : Loans. You get cash, but you also get debt. Your net worth is substracted by your debt. Debt increases over time. Working in factory minigame ?
+-> With money, you can buy ships of different sizes (of different purposes ? Mining special ores ? Fighting ?)
+-> Game is about investing your money to
+	-> Generate more money
+	-> Keep your business going (threats ? Competitors ? Pirates ?)
+-> Where does the fun of the game come from ?
+	-> Need to see numbers going up more and more quickly. Feel like the player is increasing in "scale" (both figuratevily and literally). 
+	-> Economy
+		-> Increase mining capacity by hiring AI miners and getting a bigger mining ship.
+		-> Build stations
+			-> Mining station. Automatically mines asteroids in a large range. Doesn't move. Need to haul the ore back to the commercial hub.
+			-> Factory stations to process ore ? Better price at the station ? Need to use ore to build stuff in space ?
+		-> SEE NET WORTH AT ALL TIMES. BIG GREEN SHINY.
+	-> Combat ?
+		-> Drive competition (independent miners and competing corporations) out of asteroid belts ?
+		-> Repel pirate attacks ?
+		-> Build own trade hubs & factories. Eventually create full fledged faction and have a military (because you get attacked more and can't mine in owned space anymore).
+	-> Ship control
+		-> "Semi realistic" space mechanics : Space control but with drag.
+		-> Warp drive mechanic. Needs special fuel ?
+			-> Fuel mechanic. Buy fuel from commercial hub. What is fuel made with ? Can you mine it ? Can you make your own fuel ? Resupply ships ?
+		-> Needs map. Proximity map with fine control over the ship and "universe" map with distant places you can go to.
+			-> Added complexity : need to "stream" map. Warp drive working from the universe map only -> When used, get a "loading screen" kinda thing. Load whatever objects are in the area around wherever the player warps to.
+				-> How to handle objects which are "unloaded" (far away from the player).
+					-> Unloaded / Loaded AI mechanics ?
+					-> "Universal grid" system with position tied to the grid. So the position numbers never exceed a certain range.
+						-> In "local" space, player moves very slowly. So the player can't really travel huge distances which would lead to precision errors.
+						-> When using the warp drive, "hide" stuff by using a loading screen (warp animation) and move the entire universe (IN UNITY COORDINATES, NOT THE CUSTOM COORDINATES) with the inverse movement vector than the player, and update their position
+							in the grid system.
+
+
+
+
+
+IDEA # 2 : Life seeding god game.
+
+-> Start with barren rock terrain and water. Seed life to generate the right amount of gaz in the atmosphere, which will allow you to place the first plants, then animals, then need to balance the ecosystem.
+Goal is to reach a minimum amount of biomass for a certain amount of time.
+
+-> Simple map with half ocean, half land. Can place land based plants, water based plants. Plants generate Oxygen. Consume CO2. Can place land based / water based herbivores and carnivores. Plants stay in place until consumed.
+Herbivores consume plants. Flee from carnivores. Carnivores consume herbivores. Chase herbivores. Ignore plants.
+
+IDEA # 3 : Strategy / Action game. Conquering forteresses.
+
+-> Start playing as one person. Enlist to fight for a faction. Make money, recruit followers. Eventually mount your own assault on a fortress. Start getting income, recruit more, conquer the map.
+
+-> World map with fortresses. Simple faction system with a "frontline". Player can fight on a frontline with his troops (alone at the start). Player makes money but helps a faction. Player can recruit troops. Take fortresses on his own,
+which creates a new faction. At that point can't fight for others. Then rely on fortress income and troops to conquer the whole map.
+
+IDEA # 4 : Self replicating system.
+
+-> Start with one "cell" of that system. Expand over an entire environment. Collect "food" where it is available, bring it over to places where food is needed in order to reach other food sources. Goal is to have access to all food ?
+Expand over entire map ? Compete against AI systems ?
+
+-> Start with one cell. Tile based terrain. Each cell has parent cells and child cells (player can invert the relationship manually). Energy transfers from child to parent. Cells automatically expand to the "easiest" neighbouring cell
+when enough energy is accumulated. Player can forbid cells from expanding (and receiving energy). Goal is to reach all energy sources on the map.
+
+IDEA # 5 : Survival game.
+
+-> Start with nothing. Fight monsters. Eventually escape the game environment.
+
+-> Arrive on a beach naked. Gather wood, stone, animal materials to craft weapons and tools. Eventually build a boat and get away.
