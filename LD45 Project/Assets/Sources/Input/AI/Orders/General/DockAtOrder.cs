@@ -2,10 +2,14 @@
 
 public class DockAtOrder : AIState
 {
+    const float PostDockSuccessMaximumDelay = 6f;
+
     GoToOrder goToOrder;
     private Dock target;
     private Dockable dockableComponent;
     private bool reachedTarget = false;
+    private bool docked = true;
+    private float currentPostDockSuccessDelay = 0f;
 
     public DockAtOrder(GameObject ship, Dock target) : base(ship)
     {
@@ -13,7 +17,7 @@ public class DockAtOrder : AIState
 
 
 
-        goToOrder = new GoToOrder(ship, target.transform.position);
+        goToOrder = new GoToOrder(ship, target.transform.position, target.DockingRange * 0.8f);
         goToOrder.OnStateFailed += GoToOrder_OnStateFailed;
         goToOrder.OnStateSucceeded += GoToOrder_OnStateSucceeded;
 
@@ -37,13 +41,13 @@ public class DockAtOrder : AIState
     public void AssignTarget(Dock t)
     {
         target = t;
-        goToOrder.AssignTarget(t.transform.position);
+        goToOrder.AssignTarget(t.transform.position, target.DockingRange * 0.8f);
         reachedTarget = false;
     }
 
     private void OnShipDocked(Dock obj)
     {
-        Succeed();
+        docked = true;
     }
 
     public override void Start()
@@ -53,7 +57,8 @@ public class DockAtOrder : AIState
             Fail("NO TARGET");
             return;
         }
-
+        currentPostDockSuccessDelay = Random.Range(0f, PostDockSuccessMaximumDelay * 0.8f);
+        docked = false;
         float dist = goToOrder.GetSquaredDistanceToTarget();
         if (target.DockingRange > dist)
         {
@@ -76,11 +81,17 @@ public class DockAtOrder : AIState
         {
             goToOrder.Update();
         }
+        else if (docked)
+        {
+            currentPostDockSuccessDelay += Time.deltaTime;
+            if (currentPostDockSuccessDelay > PostDockSuccessMaximumDelay)
+                Succeed();
+        }
     }
 
     public override AIInputData OnOrderInput()
     {
-        if (reachedTarget && target != null)
+        if (!docked && reachedTarget && target != null)
         {
             return new AIInputData
             {

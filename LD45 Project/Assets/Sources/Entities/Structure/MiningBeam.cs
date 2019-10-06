@@ -24,6 +24,8 @@ public class MiningBeam : MonoBehaviour
         }
     }
 
+    public RESOURCE_TYPE MinedResource { get { return mineableResource; } }
+
     private void Awake()
     {
         shipControllerInput = GetComponent<ShipPiloting>();
@@ -38,9 +40,8 @@ public class MiningBeam : MonoBehaviour
             if (shipControllerInput.CurrentPilot.usingActiveEquipment && target != null && target.GetComponent<Mineable>())
             {
                 var mineable = target.GetComponent<Mineable>();
-                var mineableCargo = target.GetComponent<Cargo>();
 
-                if (mineableCargo.HasResource((uint)mineableResource) && (transform.position - target.transform.position).sqrMagnitude < range * range)
+                if (mineable.ResourceType == mineableResource && (transform.position - target.transform.position).sqrMagnitude < range * range)
                 {
                     Debug.DrawLine(transform.position, shipControllerInput.CurrentPilot.targetedPosition + (Vector2)transform.position);
                     mineBuffer[(uint)mineableResource] += miningStrength * Time.deltaTime;

@@ -22,6 +22,12 @@ public class GoToOrder : AIState
         targetPosition = t;
     }
 
+    public void AssignTarget(Vector2 t, float arrivalRange)
+    {
+        targetPosition = t;
+        arrivalDistance = arrivalRange;
+    }
+
     public override void Start()
     {
         if (targetPosition.HasValue == false)

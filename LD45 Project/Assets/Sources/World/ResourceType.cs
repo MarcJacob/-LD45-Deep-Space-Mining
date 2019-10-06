@@ -5,12 +5,12 @@ using System.ComponentModel;
 
 public enum RESOURCE_TYPE
 {
-    [Description("Iron Ore")]
+    [Description("Ore")]
     [BasePrice(5f)]
-    IRON_ORE = 0,
-    [Description("Steel")]
+    ORE = 0,
+    [Description("Metal")]
     [BasePrice(15f)]
-    STEEL = 1,
+    METAL = 1,
     [BasePrice(2.5f)]
     [Description("Ice")]
     ICE = 2

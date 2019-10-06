@@ -64,6 +64,12 @@ public class GameManager : MonoBehaviour
     private float goalNetWorth = 100000f;
 
     private float currentDebtIncreaseCooldown = 0f;
+    private bool gracePeriodStarted = false;
+
+    public void StartGracePeriod()
+    {
+        gracePeriodStarted = true;
+    }
 
     private void Awake()
     {
@@ -73,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        gracePeriod -= Time.deltaTime;
+        if (gracePeriodStarted) gracePeriod -= Time.deltaTime;
         if (Debt > 0)
         {
             currentDebtIncreaseCooldown -= Time.deltaTime;
