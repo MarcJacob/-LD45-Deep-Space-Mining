@@ -15,7 +15,10 @@ public class VisibleWhenShipBoarded : MonoBehaviour
 
     private void Start()
     {
-        PlayerInput_OnPlayerShipChanged(PlayerInput.CurrentShip.gameObject);
+        if (PlayerInput.CurrentShip != null)
+            PlayerInput_OnPlayerShipChanged(PlayerInput.CurrentShip.gameObject);
+        else
+            PlayerInput_OnPlayerShipChanged(null);
     }
 
     private void PlayerInput_OnPlayerShipChanged(GameObject obj)

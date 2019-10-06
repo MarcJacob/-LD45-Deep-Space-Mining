@@ -9,10 +9,13 @@ public class GeneralUIFigures : MonoBehaviour
     private TextMeshProUGUI playerNetWorthText;
     [SerializeField]
     private TextMeshProUGUI playerCashText;
+    [SerializeField]
+    private TextMeshProUGUI playerDebtText;
 
     private void Update()
     {
-        playerNetWorthText.text = GameManager.NetWorth.ToString() + " $";
-        playerCashText.text = GameManager.PlayerCash + " $";
+        playerNetWorthText.text = "$ " + GameManager.NetWorth.ToString();
+        playerCashText.text = "$ " + GameManager.PlayerCash;
+        playerDebtText.text = "$ " + GameManager.Debt;
     }
 }

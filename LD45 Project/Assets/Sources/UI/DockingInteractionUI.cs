@@ -8,6 +8,8 @@ public class DockingInteractionUI : MonoBehaviour
     private GameObject dockingPrompt;
     [SerializeField]
     private GameObject dockedInterface;
+    [SerializeField]
+    private Dock startStation;
 
     Dockable playerLastShip;
     private bool docked = false;
@@ -16,6 +18,18 @@ public class DockingInteractionUI : MonoBehaviour
     {
         PlayerInput.OnPlayerShipChanged += (go) => { if (go != null) OnPlayerShipChanged(go.GetComponent<Dockable>()); else OnPlayerShipChanged(null); };
         dockingPrompt.SetActive(false);
+    }
+
+    private void Start()
+    {
+        if (startStation != null)
+        {
+            PlayerShip_OnShipDocked(startStation);
+            var pos = Camera.main.transform.position;
+            pos.x = startStation.transform.position.x;
+            pos.y = startStation.transform.position.y;
+            Camera.main.transform.position = pos;
+        }
     }
 
     private void OnPlayerShipChanged(Dockable playerShip)
