@@ -74,7 +74,6 @@ public class ShipEngine : MonoBehaviour
         // Drag
         float speedDragRatio = 1 - (currentVelocity.magnitude * currentVelocity.magnitude * dragRatio);
         if (speedDragRatio > 0.98f) speedDragRatio = 0.98f;
-        Debug.Log(speedDragRatio);
         currentVelocity *= speedDragRatio >= 0f ? speedDragRatio : 0f;
         if (currentVelocity.magnitude < 0.005f && acceleration <= 0f && strafe != 0f) currentVelocity = Vector2.zero;
 

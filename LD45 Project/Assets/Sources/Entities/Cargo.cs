@@ -85,6 +85,15 @@ public class Cargo : MonoBehaviour
         return cargo.Sum(c => c) == 0;
     }
 
+    public bool IsFull
+    {
+        get
+        {
+            long currentCargo = cargo.Sum(c => c);
+            return currentCargo >= cargoCapacity;
+        }
+    }
+
     public bool HasResource(uint id)
     {
         return cargo[id] > 0;

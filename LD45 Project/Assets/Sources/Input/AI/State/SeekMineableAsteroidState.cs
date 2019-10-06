@@ -1,23 +1,13 @@
-﻿using UnityEngine;
-public class MineAndSellAutomaticallyStateMachine
+﻿using System;
+using UnityEngine;
+
+public class SeekMineableAsteroidOrder : AIState
 {
-    IAIStateMachineState currentState;
+    Action<Mineable> targetFoundCallback;
 
-    public void StartOrder()
+    public SeekMineableAsteroidOrder(GameObject ship, Action<Mineable> onTargetFoundCallback) : base(ship)
     {
-
-    }
-
-    public void UpdateOrder()
-    {
-        currentState.Update();
-    }
-}
-
-public class SeekMineableAsteroidState : IAIStateMachineState
-{
-    public SeekMineableAsteroidState(GameObject ship) : base(ship)
-    {
+        targetFoundCallback = onTargetFoundCallback;
     }
 
     public override void Start()
@@ -26,7 +16,7 @@ public class SeekMineableAsteroidState : IAIStateMachineState
         float closestDist = -1f;
         Mineable closestMineable = null;
 
-        foreach(var obj in mineableObjects)
+        foreach (var obj in mineableObjects)
         {
             float dist = (controlledShip.transform.position - obj.transform.position).sqrMagnitude;
             if (closestMineable == null || dist < closestDist)
@@ -36,7 +26,15 @@ public class SeekMineableAsteroidState : IAIStateMachineState
             }
         }
 
-
+        if (closestMineable != null)
+        {
+            Succeed();
+            targetFoundCallback(closestMineable);
+        }
+        else
+        {
+            Fail("NO TARGET FOUND");
+        }
     }
 
     public override void Update()

@@ -16,6 +16,7 @@ public class ItemTradingUI : MonoBehaviour
 
     private Cargo playerShipCargo;
     private Cargo stationCargo;
+    private Trading stationTradingComponent;
 
     private List<TradePanelLine> playerTradingPanelLines = new List<TradePanelLine>();
     private List<TradePanelLine> stationTradingPanelLines = new List<TradePanelLine>();
@@ -26,6 +27,7 @@ public class ItemTradingUI : MonoBehaviour
     public void SetDockedStation(Dock dock)
     {
         stationCargo = dock.GetComponent<Cargo>();
+        stationTradingComponent = dock.GetComponent<Trading>(); // TODO handle when station does not have trading component. Do not show the panels.
     }
 
     private void OnEnable()
@@ -90,7 +92,8 @@ public class ItemTradingUI : MonoBehaviour
             {
                 if (cargo.StoredResources[i] > 0)
                 {
-                    existingLines[lineID].SetLineInfo((RESOURCE_TYPE)i, cargo.StoredResources[i], 10f);
+                    RESOURCE_TYPE t = (RESOURCE_TYPE)i;
+                    existingLines[lineID].SetLineInfo(t, cargo.StoredResources[i], t.GetBasePrice());
                     lineID++;
                 }
             }
@@ -119,14 +122,7 @@ public class ItemTradingUI : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftControl)) amount = 100;
         if (selling && selectedLine != null)
         {
-            uint resourceID = (uint)selectedLine.ResourceID;
-            uint withdrawn;
-            if (!playerShipCargo.WithdrawResourceToMax(resourceID, (uint)amount, out withdrawn))
-            {
-                Debug.Log("Warning - Attempted to sell more resources than there are in cargo");
-            }
-            stationCargo.AddResource(resourceID, withdrawn);
-            GameManager.AddCash((int)(selectedLine.PricePerUnit * withdrawn));
+            stationTradingComponent.BuyFrom(playerShipCargo, (RESOURCE_TYPE)selectedLine.ResourceID, (uint)amount, selectedLine.PricePerUnit);
             RefreshTradePanels();
         }
     }
@@ -138,24 +134,8 @@ public class ItemTradingUI : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftControl)) amount = 100;
         if (!selling && selectedLine != null)
         {
-            uint resourceID = (uint)selectedLine.ResourceID;
-            uint withdrawn;
-            if (!stationCargo.WithdrawResourceToMax(resourceID, (uint)amount, out withdrawn))
-            {
-                Debug.LogWarning("Warning - Attempted to buy more resources than there are in cargo");
-            }
-            int totalCost = (int)(withdrawn * selectedLine.PricePerUnit);
-            if (GameManager.PlayerCash >= totalCost)
-            {
-                playerShipCargo.AddResource(resourceID, withdrawn);
-                GameManager.RemoveCash(totalCost);
-                RefreshTradePanels();
-            }
-            else
-            {
-                Debug.LogError("Error - Attempted to buy above means.");
-                stationCargo.AddResource(resourceID, withdrawn);
-            }
+            stationTradingComponent.SellTo(playerShipCargo, (RESOURCE_TYPE)selectedLine.ResourceID, (uint)amount, selectedLine.PricePerUnit);
+            RefreshTradePanels();
         }
     }
 

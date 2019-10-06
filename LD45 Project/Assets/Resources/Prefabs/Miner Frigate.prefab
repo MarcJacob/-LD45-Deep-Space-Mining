@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 615020093678344565}
   - component: {fileID: -7307000458115719653}
   - component: {fileID: 3463932891983848033}
+  - component: {fileID: 5768995063310366043}
   m_Layer: 0
   m_Name: Miner Frigate
   m_TagString: Untagged
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miningStrength: 20
-  range: 0
+  range: 3
   mineableResource: 0
   cargo: {fileID: 615020093678344561}
 --- !u!114 &615020093678344563
@@ -209,3 +210,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe91533f0b48fa45a49ef8d5ac800a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5768995063310366043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615020093678344330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8959d5331d2fc4e4f8f60433c483e195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 0
+  price: 1500

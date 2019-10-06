@@ -21,7 +21,19 @@ public class ShipTradingUI : MonoBehaviour
 
     public void SetDockedStation(Dock dock)
     {
+        if (this.dock != null)
+        {
+            this.dock.OnDockableDocked -= OnShipDockingActivity;
+            this.dock.OnDockableUndocked -= OnShipDockingActivity;
+        }
         this.dock = dock;
+        this.dock.OnDockableDocked += OnShipDockingActivity;
+        this.dock.OnDockableUndocked -= OnShipDockingActivity;
+    }
+
+    void OnShipDockingActivity(Dockable dockable)
+    {
+        RefreshShipPanels();
     }
 
     private void OnEnable()
@@ -81,7 +93,7 @@ public class ShipTradingUI : MonoBehaviour
         int lineID = 0;
         foreach (var go in shipsInList)
         {
-            existingLines[lineID].SetLineInfo(go, 1, 1000f);
+            existingLines[lineID].SetLineInfo(go);
             lineID++;
         }
     }

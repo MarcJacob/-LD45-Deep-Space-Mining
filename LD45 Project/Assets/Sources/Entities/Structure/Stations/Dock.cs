@@ -30,6 +30,9 @@ public class Dock : MonoBehaviour
         }
     }
 
+    public event Action<Dockable> OnDockableDocked = delegate { };
+    public event Action<Dockable> OnDockableUndocked = delegate { };
+
     private void Update()
     {
         dockedShipsVisible = dockedShips.ToArray();
@@ -38,11 +41,13 @@ public class Dock : MonoBehaviour
     public bool DockShip(Dockable ship)
     {
         dockedShips.Add(ship);
+        OnDockableDocked(ship);
         return true;
     }
 
     public void UndockShip(Dockable ship)
     {
         dockedShips.Remove(ship);
+        OnDockableUndocked(ship);
     }
 }

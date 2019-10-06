@@ -16,6 +16,14 @@ public class MiningBeam : MonoBehaviour
 
     float[] mineBuffer;
 
+    public float Range
+    {
+        get
+        {
+            return range;
+        }
+    }
+
     private void Awake()
     {
         shipControllerInput = GetComponent<ShipPiloting>();

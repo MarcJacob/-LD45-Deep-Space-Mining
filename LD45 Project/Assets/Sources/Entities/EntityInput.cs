@@ -11,4 +11,9 @@ public class EntityInput : MonoBehaviour
     public GameObject targetedObject { get; protected set; }
     
     public bool interacting { get; protected set; }
+
+    public virtual void Disable()
+    {
+        enabled = false;
+    }
 }

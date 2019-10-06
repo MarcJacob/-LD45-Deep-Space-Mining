@@ -28,7 +28,9 @@ public class ShipFactory : MonoBehaviour
 
     private void SpawnShip()
     {
-        var newShip = Instantiate(potentialShips[UnityEngine.Random.Range(0, potentialShips.Length)]);
+        var shipPrefab = potentialShips[UnityEngine.Random.Range(0, potentialShips.Length)];
+        var newShip = Instantiate(shipPrefab);
+        newShip.name = shipPrefab.name;
         // TODO Set position of ship depending on custom grid based system.
 
         newShip.transform.position = transform.position;

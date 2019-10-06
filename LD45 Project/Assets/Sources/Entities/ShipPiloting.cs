@@ -32,21 +32,21 @@ public class ShipPiloting : MonoBehaviour
 
     public void SwitchToPlayerControl()
     {
-        if (currentPilot != null) currentPilot.enabled = false;
+        if (currentPilot != null) currentPilot.Disable();
         currentPilot = GetComponent<PlayerInput>();
         currentPilot.enabled = true;
     }
 
     public void SwitchToAIControl()
     {
-        if (currentPilot != null) currentPilot.enabled = false;
+        if (currentPilot != null) currentPilot.Disable();
         currentPilot = GetComponent<AIInput>();
         currentPilot.enabled = true;
     }
 
     public void SwitchToNoControl()
     {
-        if (currentPilot != null) currentPilot.enabled = false;
+        if (currentPilot != null) currentPilot.Disable();
         currentPilot = null;
     }
 

@@ -14,7 +14,7 @@ public class DockingInteractionUI : MonoBehaviour
 
     private void Awake()
     {
-        PlayerInput.OnPlayerShipChanged += (go) => { if (go != null) OnPlayerShipChanged(go.GetComponent<Dockable>()); };
+        PlayerInput.OnPlayerShipChanged += (go) => { if (go != null) OnPlayerShipChanged(go.GetComponent<Dockable>()); else OnPlayerShipChanged(null); };
         dockingPrompt.SetActive(false);
     }
 
@@ -28,10 +28,14 @@ public class DockingInteractionUI : MonoBehaviour
             playerLastShip.OnShipUndocked -= PlayerShip_OnShipUndocked;
         }
 
-        playerShip.OnShipInDockingRange += PlayerShip_OnShipInDockingRange;
-        playerShip.OnShipOutOfDockingRange += PlayerShip_OnShipOutOfDockingRange;
-        playerShip.OnShipDocked += PlayerShip_OnShipDocked;
-        playerShip.OnShipUndocked += PlayerShip_OnShipUndocked;
+        if (playerShip != null)
+        {
+            playerShip.OnShipInDockingRange += PlayerShip_OnShipInDockingRange;
+            playerShip.OnShipOutOfDockingRange += PlayerShip_OnShipOutOfDockingRange;
+            playerShip.OnShipDocked += PlayerShip_OnShipDocked;
+            playerShip.OnShipUndocked += PlayerShip_OnShipUndocked;
+        }
+
         playerLastShip = playerShip;
     }
 
@@ -40,6 +44,8 @@ public class DockingInteractionUI : MonoBehaviour
         dockedInterface.SetActive(false);
         gameObject.SetActive(true);
         docked = false;
+
+        CameraZoom.Activate();
     }
 
     private void PlayerShip_OnShipDocked(Dock obj)
@@ -50,6 +56,8 @@ public class DockingInteractionUI : MonoBehaviour
         dockedInterface.GetComponent<ShipTradingUI>().SetDockedStation(obj);
         dockedInterface.SetActive(true);
         docked = true;
+
+        CameraZoom.Deactivate();
     }
 
     private void PlayerShip_OnShipOutOfDockingRange()

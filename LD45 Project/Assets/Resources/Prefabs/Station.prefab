@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8425039926269427419}
   - component: {fileID: 8425039926269427418}
   - component: {fileID: -377502095909165898}
+  - component: {fileID: -3952327676228138091}
+  - component: {fileID: -2910308391308894593}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -156,3 +158,28 @@ MonoBehaviour:
   - {fileID: 615020093678344330, guid: 3c136b014e815294a960bf9f49f5a38f, type: 3}
   - {fileID: 615020093678344330, guid: 3c136b014e815294a960bf9f49f5a38f, type: 3}
   - {fileID: 615020093678344330, guid: f05077bfcdf0470459877d75ad587f01, type: 3}
+--- !u!114 &-3952327676228138091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8425039926269427399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b220260a67da0e1478f6ce00ad5c66db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerFactionID: 0
+--- !u!114 &-2910308391308894593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8425039926269427399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9b111a9beeff04eb44e4a88d761e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

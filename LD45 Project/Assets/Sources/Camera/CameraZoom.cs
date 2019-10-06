@@ -2,6 +2,16 @@
 
 public class CameraZoom : MonoBehaviour
 {
+    static CameraZoom Instance;
+    static public void Activate()
+    {
+        Instance.enabled = true;
+    }
+    static public void Deactivate()
+    {
+        Instance.enabled = false;
+    }
+
     [SerializeField]
     private float maxZoom = -4f;
     [SerializeField]
@@ -16,6 +26,7 @@ public class CameraZoom : MonoBehaviour
     private void Awake()
     {
         desiredZoomLevel = transform.position.z;
+        Instance = this;
     }
     private void Update()
     {

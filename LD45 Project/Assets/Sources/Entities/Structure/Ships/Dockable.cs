@@ -13,7 +13,12 @@ public class Dockable : MonoBehaviour
     private ShipPiloting shipControllerInput;
 
     public bool Docked { get; private set; }
-
+    public Dock DockedAt { get
+        {
+            if (!Docked) return null;
+            else return currentDockInteractionCandidate;
+        }
+    }
 
     private void Awake()
     {
@@ -29,8 +34,9 @@ public class Dockable : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, dock.transform.position) <= dock.DockingRange && dock.DockShip(this))
         {
-            OnShipDocked(dock);
             Docked = true;
+            currentDockInteractionCandidate = dock;
+            OnShipDocked(dock);
         }
         else
         {
@@ -71,7 +77,6 @@ public class Dockable : MonoBehaviour
 
             if (Mathf.Sqrt(shortestRange) <= nearest.DockingRange)
             {
-                Debug.Log("Station in range to dock !");
                 OnShipInDockingRange(nearest);
                 currentDockInteractionCandidate = nearest;
             }

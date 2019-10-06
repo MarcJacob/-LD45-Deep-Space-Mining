@@ -28,5 +28,9 @@ public class CameraFollowPlayerShip : MonoBehaviour
         {
             cameraFollowComponent.SetFollowTarget(obj.transform);
         }
+        if (obj == null)
+        {
+            cameraFollowComponent.SetFollowTarget(null);
+        }
     }
 }

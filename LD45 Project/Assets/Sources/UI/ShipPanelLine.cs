@@ -11,7 +11,7 @@ public class ShipPanelLine : MonoBehaviour
     private TextMeshProUGUI shipPriceText;
 
     GameObject ship;
-    uint size;
+    SHIP_SIZE size;
     float price;
     bool playerShip = false;
     bool aiShip = false;
@@ -25,7 +25,7 @@ public class ShipPanelLine : MonoBehaviour
             return ship;
         }
     }
-    public uint Size
+    public SHIP_SIZE Size
     {
         get
         {
@@ -40,15 +40,17 @@ public class ShipPanelLine : MonoBehaviour
         }
     }
 
-    public void SetLineInfo(GameObject ship, uint amount, float pricePerUnit)
+    public void SetLineInfo(GameObject ship)
     {
+        var shipProperties = ship.GetComponent<ShipProperties>();
+
         this.ship = ship;
-        this.size = amount;
-        this.price = pricePerUnit;
+        this.size = shipProperties.Size;
+        this.price = shipProperties.Price;
 
         shipNameText.text = ship.name;
         shipSizeText.text = Size.ToString();
-        shipPriceText.text = pricePerUnit + "$";
+        shipPriceText.text = price + "$";
 
         playerShip = ship.GetComponent<ShipPiloting>().PlayerControlled;
         aiShip = ship.GetComponent<ShipPiloting>().AIControlled;
