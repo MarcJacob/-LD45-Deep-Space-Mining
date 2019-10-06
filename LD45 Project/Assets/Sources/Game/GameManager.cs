@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     static GameManager Instance;
     static public float NetWorth
     {
-        get { return Instance.playerCash - Instance.playerDebt; } // TODO Get all player owned ships and add their value aswell as their cargo's base value. }
+        get
+        {
+            return Instance.playerCash - Instance.playerDebt + Instance.playerAssetsValue;
+        } // TODO Get all player owned ships and add their value aswell as their cargo's base value. }
     }
     static public float PlayerCash
     {
@@ -22,6 +25,8 @@ public class GameManager : MonoBehaviour
     {
         get { return Instance.gracePeriod; }
     }
+
+
 
     public static void RemoveDebt(float currentLoanPayBackValue)
     {
@@ -65,6 +70,19 @@ public class GameManager : MonoBehaviour
 
     private float currentDebtIncreaseCooldown = 0f;
     private bool gracePeriodStarted = false;
+
+    public float playerAssetsValue { get
+        {
+            var allFacMembers = Ownership.GetFactionMembers(1);
+            float val = 0f;
+            foreach(var member in allFacMembers)
+            {
+                val += member.GetComponent<ShipProperties>().Price;
+                val += member.GetComponent<Cargo>().CargoBaseValue;
+            }
+            return val;
+        }
+    }
 
     public void StartGracePeriod()
     {

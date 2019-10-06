@@ -102,6 +102,20 @@ public class Cargo : MonoBehaviour
         }
     }
 
+    public float CargoBaseValue
+    {
+        get
+        {
+            float val = 0f;
+            for(int i = 0; i < cargo.Length; i++)
+            {
+                RESOURCE_TYPE t = (RESOURCE_TYPE)i;
+                val += cargo[i] * t.GetBasePrice();
+            }
+            return val;
+        }
+    }
+
     public bool HasResource(uint id)
     {
         return cargo[id] > 0;

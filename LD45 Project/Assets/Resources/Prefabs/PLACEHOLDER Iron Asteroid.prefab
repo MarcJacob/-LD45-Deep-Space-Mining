@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3979698486411477121}
   - component: {fileID: 3979698486411477122}
   - component: {fileID: 3979698486411477135}
+  - component: {fileID: -6112541542900532073}
   m_Layer: 0
   m_Name: PLACEHOLDER Iron Asteroid
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: edb561fb0ff2bc342b999fef4e28c61b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77f5ef6fbfbe75040ae2f53dd68ac484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +100,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.94, y: 1.96}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -123,3 +124,22 @@ MonoBehaviour:
   destroyOnMinedOut: 1
   amountLeft: 1000
   resourceType: 0
+--- !u!114 &-6112541542900532073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979698486411477123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 724e7bbe545618141880b3c772fc268f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 77f5ef6fbfbe75040ae2f53dd68ac484, type: 3}
+  - {fileID: 21300000, guid: 3ca939f96a6666743becd3466c6369ef, type: 3}
+  - {fileID: 21300000, guid: 288717ff3ef356343a20f1416f472a04, type: 3}
+  - {fileID: 21300000, guid: 8f31e89a16c505d4787365d334916008, type: 3}
+  - {fileID: 21300000, guid: 146045d8bf71a0c4bafa12bab8d6cc2a, type: 3}
+  - {fileID: 21300000, guid: b0ecd54b4d466ac4fbad818da216d079, type: 3}

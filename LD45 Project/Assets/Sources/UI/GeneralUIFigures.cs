@@ -14,8 +14,8 @@ public class GeneralUIFigures : MonoBehaviour
 
     private void Update()
     {
-        playerNetWorthText.text = "$ " + GameManager.NetWorth.ToString();
-        playerCashText.text = "$ " + GameManager.PlayerCash;
-        playerDebtText.text = "$ " + GameManager.Debt;
+        playerNetWorthText.text = "$ " + ((int)(GameManager.NetWorth)).ToString();
+        playerCashText.text = "$ " + (int)GameManager.PlayerCash;
+        playerDebtText.text = "$ " + (int)GameManager.Debt;
     }
 }
