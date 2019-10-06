@@ -15,14 +15,17 @@ public class SeekMineableAsteroidOrder : AIState
         Mineable[] mineableObjects = GameObject.FindObjectsOfType<Mineable>();
         float closestDist = -1f;
         Mineable closestMineable = null;
-
+        var beam = controlledShip.GetComponent<MiningBeam>();
         foreach (var obj in mineableObjects)
         {
-            float dist = (controlledShip.transform.position - obj.transform.position).sqrMagnitude;
-            if (closestMineable == null || dist < closestDist)
+            if (obj.ResourceType == beam.MinedResource)
             {
-                closestMineable = obj;
-                closestDist = dist;
+                float dist = (controlledShip.transform.position - obj.transform.position).sqrMagnitude;
+                if (closestMineable == null || dist < closestDist)
+                {
+                    closestMineable = obj;
+                    closestDist = dist;
+                }
             }
         }
 

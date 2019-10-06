@@ -25,6 +25,7 @@ public class LoanManagementUI : MonoBehaviour
         {
             GameManager.RemoveCash(currentLoanPayBackValue);
             GameManager.RemoveDebt(currentLoanPayBackValue);
+            UpdateLoanPayBackValue(currentLoanPayBackValue.ToString());
         }
     }
 

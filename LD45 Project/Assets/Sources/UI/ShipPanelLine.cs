@@ -52,10 +52,15 @@ public class ShipPanelLine : MonoBehaviour
         shipSizeText.text = Size.ToString();
         shipPriceText.text = price + "$";
 
-        playerShip = ship.GetComponent<ShipPiloting>().PlayerControlled;
-        aiShip = ship.GetComponent<ShipPiloting>().AIControlled;
+        CheckShipStatus();
         if (!selected)
             RefreshColor();
+    }
+
+    private void CheckShipStatus()
+    {
+        playerShip = ship.GetComponent<ShipPiloting>().PlayerControlled;
+        aiShip = ship.GetComponent<ShipPiloting>().AIControlled;
     }
 
     public void OnLineSelected()
@@ -69,6 +74,7 @@ public class ShipPanelLine : MonoBehaviour
     public void OnLineDeselected()
     {
         selected = false;
+        CheckShipStatus();
         RefreshColor();
     }
 

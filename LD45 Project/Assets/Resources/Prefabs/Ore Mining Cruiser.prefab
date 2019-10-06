@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 3463932891983848033}
   - component: {fileID: -1352374118708469399}
   m_Layer: 0
-  m_Name: Miner Cruiser
+  m_Name: Ore Mining Cruiser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miningStrength: 60
-  range: 6
+  range: 10
   mineableResource: 0
   cargo: {fileID: 615020093678344561}
 --- !u!114 &615020093678344563
@@ -223,4 +223,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 1
-  price: 4000
+  price: 10000

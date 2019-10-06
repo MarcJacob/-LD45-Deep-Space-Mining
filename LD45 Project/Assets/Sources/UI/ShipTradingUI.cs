@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class ShipTradingUI : MonoBehaviour
 {
@@ -18,193 +19,225 @@ public class ShipTradingUI : MonoBehaviour
     private bool selling;
     ShipPanelLine selectedLine;
     private Dock dock;
+    private float lineHeight;
+
+    private void Awake()
+    {
+        lineHeight = tradeShipLinePrefab.GetComponent<RectTransform>().rect.height;
+    }
 
     public void SetDockedStation(Dock dock)
     {
         if (this.dock != null)
         {
-            this.dock.OnDockableDocked -= OnShipDockingActivity;
-            this.dock.OnDockableUndocked -= OnShipDockingActivity;
+            this.dock.OnDockableDocked -= OnShipDocked;
         }
         this.dock = dock;
-        this.dock.OnDockableDocked += OnShipDockingActivity;
-        this.dock.OnDockableUndocked -= OnShipDockingActivity;
+        this.dock.OnDockableDocked += OnShipDocked;
     }
 
-    void OnShipDockingActivity(Dockable dockable)
+    void OnShipDocked(Dockable dockable)
     {
-        RefreshShipPanels();
-    }
-
-    private void OnEnable()
-    {
-        InvokeRepeating("RefreshShipPanels", 0f, 3f);
-    }
-
-    private void OnDisable()
-    {
-        CancelInvoke("RefreshShipPanels");
-    }
-
-    private void RefreshShipPanels()
-    {
-        RefreshShipPanel(playerTradingPanelContent, playerTradingPanelLines, true);
-        RefreshShipPanel(stationTradingPanelContent, stationTradingPanelLines, false);
-    }
-
-    private void RefreshShipPanel(GameObject panel, List<ShipPanelLine> existingLines, bool selling)
-    {
-        IEnumerable<GameObject> shipsInList;
-        if (selling)
+        // Create line
+        var owner = dockable.GetComponent<Ownership>();
+        ShipPanelLine line;
+        int currentLineAmount = 0;
+        if (owner == null || owner.OwnerFactionID == 0)
         {
-            shipsInList = GetPlayerShipsAtDock();
+            // Create line on station's side
+            line = CreateLine(dockable.gameObject);
+            currentLineAmount = stationTradingPanelLines.Count;
+            MoveLineToPanel(stationTradingPanelContent.transform, stationTradingPanelLines, line);
+
+            
         }
-        else
+        else if (owner != null && owner.OwnerFactionID == 1)
         {
-            shipsInList = GetUnownedShipsAtDock();
+            // Create line on player's side
+            line = CreateLine(dockable.gameObject);
+            currentLineAmount = playerTradingPanelLines.Count;
+            MoveLineToPanel(playerTradingPanelContent.transform, playerTradingPanelLines, line);
         }
+        else line = null;
 
-        float lineHeight = tradeShipLinePrefab.GetComponent<RectTransform>().rect.height;
-        int lineAmount = shipsInList.Count();
-
-        var delta = panel.GetComponent<RectTransform>().sizeDelta;
-        delta.y = lineHeight * lineAmount;
-        panel.GetComponent<RectTransform>().sizeDelta = delta;
-
-        if (lineAmount > existingLines.Count)
+        if (line != null)
         {
-            int lineAmountToInstantiate = lineAmount - existingLines.Count;
-            for (int i = 0; i < lineAmountToInstantiate; i++)
+            line.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, -lineHeight * (currentLineAmount + 0.5f));
+            line.SetLineInfo(dockable.gameObject);
+            line.gameObject.SetActive(true);
+
+            Action<Dock> handler = null;
+            handler = (dock) =>
             {
-                GameObject newLine = CreateShipLine(panel, existingLines, lineHeight, selling);
-                existingLines.Add(newLine.GetComponent<ShipPanelLine>());
+                dockable.OnShipUndocked -= handler;
+                OnShipUndocked(line);
+            };
+            dockable.OnShipUndocked += handler;
+        }
+    }
+
+    void OnShipUndocked(ShipPanelLine line)
+    {
+        RemoveLineFromList(playerTradingPanelLines, line);
+        RemoveLineFromList(stationTradingPanelLines, line);
+        Destroy(line.gameObject);
+    }
+
+    private void RemoveLineFromList(List<ShipPanelLine> list, ShipPanelLine line)
+    {
+        bool lineRemoved = false;
+        for (int l = 0; l < list.Count; l++)
+        {
+            if (list[l] == line)
+            {
+                lineRemoved = true;
+                
+                list.RemoveAt(l);
+                l--;
+            }
+            else if (lineRemoved)
+            {
+                list[l].GetComponent<RectTransform>().anchoredPosition += new Vector2(0f, lineHeight);
             }
         }
-        else if (lineAmount < existingLines.Count)
-        {
-            for (int i = lineAmount; i < existingLines.Count; i++)
-            {
-                var line = existingLines[i];
-                existingLines.RemoveAt(i);
-                Destroy(line.gameObject);
-            }
-        }
-
-        int lineID = 0;
-        foreach (var go in shipsInList)
-        {
-            existingLines[lineID].SetLineInfo(go);
-            lineID++;
-        }
     }
 
-    private IEnumerable<GameObject> GetUnownedShipsAtDock()
+    private ShipPanelLine CreateLine(GameObject ship)
     {
-        var dockedShips = dock.DockedShips;
-        var unownedShips = dockedShips.Where(ship => ship.GetComponent<Ownership>().OwnerFactionID == 0);
-
-        return unownedShips.Select(s => s.gameObject);
+        var line = Instantiate(tradeShipLinePrefab);
+        line.SetActive(false);
+        line.GetComponent<Button>().onClick.AddListener(() => SelectLine(line));
+        return line.GetComponent<ShipPanelLine>();
     }
 
-    private IEnumerable<GameObject> GetPlayerShipsAtDock()
+    private void MoveLineToPanel(Transform panel, List<ShipPanelLine> lines, ShipPanelLine line)
     {
-        var dockedShips = dock.DockedShips;
-        var playerShips = dockedShips.Where(ship => ship.GetComponent<Ownership>().OwnerFactionID == 1);
-
-        return playerShips.Select(s => s.gameObject);
-    }
-
-    private GameObject CreateShipLine(GameObject panel, List<ShipPanelLine> existingLines, float lineHeight, bool selling)
-    {
-        var newLine = Instantiate(tradeShipLinePrefab);
-        var linePos = newLine.GetComponent<RectTransform>().position;
-        linePos.y = (existingLines.Count + 0.5f) * -lineHeight;
-
-        newLine.GetComponent<RectTransform>().position = linePos;
-        newLine.GetComponent<RectTransform>().SetParent(panel.transform, false);
-
-        newLine.GetComponent<Button>().onClick.AddListener(() => SelectLine(newLine, selling));
-
-        return newLine;
+        RectTransform rTransform = line.GetComponent<RectTransform>();
+        rTransform.SetParent(panel);
+        rTransform.anchoredPosition = new Vector2(0f, (lines.Count + 0.5f) * -lineHeight);
+        lines.Add(line);
     }
 
     public void Sell()
     {
-        if (selling && selectedLine != null)
+        if (selectedLine != null)
         {
-            GameManager.AddCash((int)selectedLine.Price);
             var ship = selectedLine.Ship;
-            ship.GetComponent<Ownership>().OwnerFactionID = 0;
-            RefreshShipPanels();
+            uint ownerID = ship.GetComponent<Ownership>() ? ship.GetComponent<Ownership>().OwnerFactionID : 0;
+
+            if (ownerID == 1)
+            {
+                RemoveLineFromList(playerTradingPanelLines, selectedLine);
+                MoveLineToPanel(stationTradingPanelContent.transform, stationTradingPanelLines, selectedLine);
+                ship.GetComponent<Ownership>().OwnerFactionID = dock.GetComponent<Ownership>().OwnerFactionID;
+                ship.GetComponent<ShipPiloting>().SwitchToNoControl();
+                DeselectLines();
+
+                GameManager.AddCash(selectedLine.Price);
+            }
+            else
+            {
+                Debug.LogError("Attempted to sell a ship the player doesn't own.");
+            }
         }
     }
 
     public void Buy()
     {
-        if (!selling && selectedLine != null)
+        if (selectedLine != null)
         {
-            int totalCost = (int)selectedLine.Price;
-            if (GameManager.PlayerCash >= totalCost)
-            {
-                GameManager.RemoveCash(totalCost);
-                var ship = selectedLine.Ship;
+            var ship = selectedLine.Ship;
+            uint ownerID = ship.GetComponent<Ownership>() ? ship.GetComponent<Ownership>().OwnerFactionID : 0;
 
+            if (ownerID == 0)
+            {
+                if (GameManager.PlayerCash < selectedLine.Price) return;
+
+                RemoveLineFromList(stationTradingPanelLines, selectedLine);
+                MoveLineToPanel(playerTradingPanelContent.transform, playerTradingPanelLines, selectedLine);
                 ship.GetComponent<Ownership>().OwnerFactionID = 1;
-                DeselectLine();
-                RefreshShipPanels();
+                DeselectLines();
+
+                GameManager.RemoveCash(selectedLine.Price);
+            }
+            else
+            {
+                Debug.LogError("Attempted to buy a ship that's already owned.");
             }
         }
     }
 
     public void BuyAIPilot()
     {
-        if (selling && selectedLine != null)
+        if (selectedLine != null)
         {
-            int totalCost = 500;
-            if (GameManager.PlayerCash >= totalCost)
+            var ship = selectedLine.Ship;
+            uint ownerID = ship.GetComponent<Ownership>() ? ship.GetComponent<Ownership>().OwnerFactionID : 0;
+
+            if (ownerID == 1)
             {
-                GameManager.RemoveCash(totalCost);
-                var ship = selectedLine.Ship;
-                ship.GetComponent<ShipPiloting>().SwitchToAIControl();
-                DeselectLine();
-                RefreshShipPanels();
+                var piloting = ship.GetComponent<ShipPiloting>();
+                if (piloting.AIControlled) return;
+                else if (GameManager.PlayerCash >= 500)
+                {
+                    piloting.SwitchToAIControl();
+                    GameManager.RemoveCash(500);
+                }
             }
+            else
+            {
+                Debug.LogError("Attempted to buy AI pilot for a ship the player doesn't own.");
+            }
+            DeselectLines();
         }
     }
 
     public void Board()
     {
-        if (selling && selectedLine != null)
+        if (selectedLine != null)
         {
             var ship = selectedLine.Ship;
-            var previousShip = PlayerInput.CurrentShip;
-            if (previousShip != null)
+            uint ownerID = ship.GetComponent<Ownership>() ? ship.GetComponent<Ownership>().OwnerFactionID : 0;
+
+            if (ownerID == 1)
             {
-                if (ship.GetComponent<ShipPiloting>().AIControlled)
+                var piloting = ship.GetComponent<ShipPiloting>();
+                if (PlayerInput.CurrentShip != null)
                 {
-                    previousShip.GetComponent<ShipPiloting>().SwitchToAIControl();
+                    if (piloting.AIControlled)
+                    {
+                        PlayerInput.CurrentShip.SwitchToAIControl();
+                    }
+                    else
+                    {
+                        PlayerInput.CurrentShip.SwitchToNoControl();
+                    }
                 }
-                else
-                    previousShip.GetComponent<ShipPiloting>().SwitchToNoControl();
+
+                piloting.SwitchToPlayerControl();
             }
-            ship.GetComponent<ShipPiloting>().SwitchToPlayerControl();
-            DeselectLine();
-            RefreshShipPanels();
+            else
+            {
+                Debug.LogError("Attempted to board a ship the player doesn't own.");
+            }
+            DeselectLines();
         }
     }
 
-    public void SelectLine(GameObject obj, bool selling)
+    public void SelectLine(GameObject obj)
     {
         var line = obj.GetComponent<ShipPanelLine>();
         if (selectedLine != null) selectedLine.OnLineDeselected();
 
         selectedLine = line;
-        this.selling = selling;
         line.OnLineSelected();
     }
 
-    public void DeselectLine()
+    public void DeselectLines()
     {
-        if (selectedLine != null) selectedLine.OnLineDeselected();
+        foreach (var line in playerTradingPanelLines)
+            line.OnLineDeselected();
+        foreach (var line in stationTradingPanelLines)
+            line.OnLineDeselected();
     }
 }

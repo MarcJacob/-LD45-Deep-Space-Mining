@@ -31,8 +31,8 @@ public class MineAndSellAutomaticallyBehavior
 
     public void StartBehavior()
     {
-        orderQueue.AssignOrder(mineNearestOrder);
         ongoing = true;
+        orderQueue.AssignOrder(mineNearestOrder);
     }
 
     public void UpdateBehavior()

@@ -20,6 +20,8 @@ public class ItemTradingUI : MonoBehaviour
 
     private List<TradePanelLine> playerTradingPanelLines = new List<TradePanelLine>();
     private List<TradePanelLine> stationTradingPanelLines = new List<TradePanelLine>();
+    private float lineHeight;
+    private int lineAmount;
 
     private bool selling;
     TradePanelLine selectedLine;
@@ -28,6 +30,22 @@ public class ItemTradingUI : MonoBehaviour
     {
         stationCargo = dock.GetComponent<Cargo>();
         stationTradingComponent = dock.GetComponent<Trading>(); // TODO handle when station does not have trading component. Do not show the panels.
+    }
+
+    private void Awake()
+    {
+        // Create one line per resource type per panel
+        lineHeight = tradeItemLinePrefab.GetComponent<RectTransform>().rect.height;
+        lineAmount = Enum.GetValues(typeof(RESOURCE_TYPE)).Length;
+
+        for(int i = 0; i < lineAmount; i++)
+        {
+            RESOURCE_TYPE t = (RESOURCE_TYPE)i;
+            var p = CreateTradeLine(playerTradingPanelContent, playerTradingPanelLines, lineHeight, true);
+            p.SetLineInfo(0, 0, 0);
+            var o = CreateTradeLine(stationTradingPanelContent, stationTradingPanelLines, lineHeight, false);
+            o.SetLineInfo(0, 0, 0);
+        }
     }
 
     private void OnEnable()
@@ -52,68 +70,64 @@ public class ItemTradingUI : MonoBehaviour
 
     private void RefreshTradePanels()
     {
-        RefreshTradePanel(playerTradingPanelContent, playerShipCargo, playerTradingPanelLines, true);
-        RefreshTradePanel(stationTradingPanelContent, stationCargo, stationTradingPanelLines, false);
+        RefreshTradePanel(playerShipCargo, playerTradingPanelLines, true);
+        RefreshTradePanel(stationCargo, stationTradingPanelLines, false);
     }
 
-    private void RefreshTradePanel(GameObject panel, Cargo cargo, List<TradePanelLine> existingLines, bool selling)
+    private void RefreshTradePanel(Cargo cargo, List<TradePanelLine> lines, bool selling)
     {
-
-        float lineHeight = tradeItemLinePrefab.GetComponent<RectTransform>().rect.height;
-        int lineAmount = 0;
-        if (cargo != null) lineAmount = cargo.GetStoredResourceTypes().Length;
-
-        var delta = panel.GetComponent<RectTransform>().sizeDelta;
-        delta.y = lineHeight * lineAmount;
-        panel.GetComponent<RectTransform>().sizeDelta = delta;
-
-        if (lineAmount > existingLines.Count)
+        if (cargo != null)
         {
-            int lineAmountToInstantiate = lineAmount - existingLines.Count;
-            for (int i = 0; i < lineAmountToInstantiate; i++)
+            // Pass 1 : update all amounts for all lines.
+            var stored = cargo.StoredResources;
+
+            for (int i = 0; i < stored.Length; i++)
             {
-                GameObject newLine = CreateTradeLine(panel, existingLines, lineHeight, selling);
-                existingLines.Add(newLine.GetComponent<TradePanelLine>());
+                lines[i].SetLineInfo((RESOURCE_TYPE)i, stored[i], ((RESOURCE_TYPE)i).GetBasePrice());
             }
-        }
-        else if (lineAmount < existingLines.Count)
-        {
-            for(int i = lineAmount; i < existingLines.Count; i++)
-            {
-                var line = existingLines[i];
-                existingLines.RemoveAt(i);
-                Destroy(line.gameObject);
-            }
-        }
 
-        if (lineAmount > 0)
-        {
-            int lineID = 0;
-            for (int i = 0; i < cargo.StoredResources.Length; i++)
+            // Pass 2 : hide all lines that have amount = 0. Position the other ones.
+            int visibleLinesCount = 0;
+            for (int i = 0; i < stored.Length; i++)
             {
-                if (cargo.StoredResources[i] > 0)
+                if (stored[i] > 0)
                 {
-                    RESOURCE_TYPE t = (RESOURCE_TYPE)i;
-                    existingLines[lineID].SetLineInfo(t, cargo.StoredResources[i], t.GetBasePrice());
-                    lineID++;
+                    lines[i].gameObject.SetActive(true);
+
+                    var rTransform = lines[i].GetComponent<RectTransform>();
+                    var pos = rTransform.localPosition;
+                    pos.y = (visibleLinesCount + 0.5f) * -lineHeight;
+                    rTransform.localPosition = pos;
+                    visibleLinesCount++;
+                }
+                else
+                {
+                    lines[i].gameObject.SetActive(false);
                 }
             }
         }
-
+        else
+        {
+            for (int i = 0; i < lineAmount; i++)
+            {
+                lines[i].gameObject.SetActive(false);
+            }
+        }
     }
 
-    private GameObject CreateTradeLine(GameObject panel, List<TradePanelLine> existingLines, float lineHeight, bool selling)
+    private TradePanelLine CreateTradeLine(GameObject panel, List<TradePanelLine> lines, float lineHeight, bool selling)
     {
         var newLine = Instantiate(tradeItemLinePrefab);
         var linePos = newLine.GetComponent<RectTransform>().position;
-        linePos.y = (existingLines.Count + 0.5f) * -lineHeight;
+        linePos.y = (lines.Count + 0.5f) * -lineHeight;
 
         newLine.GetComponent<RectTransform>().position = linePos;
         newLine.GetComponent<RectTransform>().SetParent(panel.transform, false);
 
         newLine.GetComponent<Button>().onClick.AddListener(() => SelectLine(newLine, selling));
-
-        return newLine;
+        var trade = newLine.GetComponent<TradePanelLine>();
+        lines.Add(trade);
+        return trade;
     }
 
     public void Sell()
