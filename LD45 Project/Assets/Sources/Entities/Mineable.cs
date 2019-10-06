@@ -1,23 +1,21 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Cargo))]
 public class Mineable : MonoBehaviour
 {
     [SerializeField]
     private bool destroyOnMinedOut = true;
+    [SerializeField]
+    private uint amountLeft;
+    [SerializeField]
+    private RESOURCE_TYPE resourceType;
 
-    private Cargo cargo;
-
-    private void Awake()
-    {
-        cargo = GetComponent<Cargo>();
-    }
+    public RESOURCE_TYPE ResourceType { get { return resourceType; } }
 
     public uint Mine(uint resourceID, uint miningStrength)
     {
-        uint withdrawn;
-        cargo.WithdrawResourceToMax(resourceID, miningStrength, out withdrawn);
-        if (cargo.IsEmpty() && destroyOnMinedOut)
+        uint withdrawn = (uint)Mathf.Min(amountLeft, miningStrength);
+        amountLeft -= withdrawn;
+        if (amountLeft <= 0 && destroyOnMinedOut)
         {
             Destroy(gameObject);
         }

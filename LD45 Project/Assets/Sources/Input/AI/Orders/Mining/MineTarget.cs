@@ -8,14 +8,14 @@ public class MineTarget : AIState
     private Mineable target;
     private Cargo shipCargo;
     private bool reachedTarget = false;
+    private float miningRange;
 
     public MineTarget(GameObject ship, Mineable target) : base(ship)
     {
         this.target = target;
+        miningRange = controlledShip.GetComponent<MiningBeam>().Range;
 
-        
-
-        goToOrder = new GoToOrder(ship, target.transform.position);
+        goToOrder = new GoToOrder(ship, target.transform.position, miningRange);
         goToOrder.OnStateFailed += GoToOrder_OnStateFailed;
         goToOrder.OnStateSucceeded += GoToOrder_OnStateSucceeded;
     }
@@ -23,6 +23,7 @@ public class MineTarget : AIState
     public MineTarget(GameObject ship) : base(ship)
     {
         target = null;
+        miningRange = controlledShip.GetComponent<MiningBeam>().Range;
         goToOrder = new GoToOrder(ship);
         goToOrder.OnStateFailed += GoToOrder_OnStateFailed;
         goToOrder.OnStateSucceeded += GoToOrder_OnStateSucceeded;
@@ -31,7 +32,7 @@ public class MineTarget : AIState
     public void AssignTarget(Mineable t)
     {
         target = t;
-        goToOrder.AssignTarget(t.transform.position);
+        goToOrder.AssignTarget(t.transform.position, miningRange);
         reachedTarget = false;
     }
 
@@ -44,9 +45,8 @@ public class MineTarget : AIState
             return;
         }
 
-        float miningRange = controlledShip.GetComponent<MiningBeam>().Range;
         float dist = goToOrder.GetSquaredDistanceToTarget();
-        if (miningRange * miningRange > dist)
+        if (miningRange * miningRange > dist * 1.5f)
         {
             reachedTarget = true;
         }

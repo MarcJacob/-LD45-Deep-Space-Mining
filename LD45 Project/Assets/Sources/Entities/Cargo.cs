@@ -23,6 +23,14 @@ public class Cargo : MonoBehaviour
             return cargo;
         }
     }
+    public uint StoredAmount
+    {
+        get { return (uint)cargo.Sum(c => c); }
+    }
+    public uint Capacity
+    {
+        get { return cargoCapacity; }
+    }
 
     private void Awake()
     {

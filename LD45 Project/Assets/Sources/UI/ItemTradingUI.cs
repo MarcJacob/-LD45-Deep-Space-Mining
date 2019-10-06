@@ -32,7 +32,8 @@ public class ItemTradingUI : MonoBehaviour
 
     private void OnEnable()
     {
-        playerShipCargo = PlayerInput.CurrentShip.GetComponent<Cargo>();
+        if (PlayerInput.CurrentShip != null)
+            playerShipCargo = PlayerInput.CurrentShip.GetComponent<Cargo>();
         PlayerInput.OnPlayerShipChanged += PlayerInput_OnPlayerShipChanged;
         InvokeRepeating("RefreshTradePanels", 0f, 3f);
     }
@@ -122,7 +123,7 @@ public class ItemTradingUI : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftControl)) amount = 100;
         if (selling && selectedLine != null)
         {
-            stationTradingComponent.BuyFrom(playerShipCargo, (RESOURCE_TYPE)selectedLine.ResourceID, (uint)amount, selectedLine.PricePerUnit);
+            stationTradingComponent.BuyFrom(playerShipCargo, (RESOURCE_TYPE)selectedLine.ResourceID, (uint)amount, selectedLine.PricePerUnit, true);
             RefreshTradePanels();
         }
     }
@@ -134,7 +135,7 @@ public class ItemTradingUI : MonoBehaviour
         else if (Input.GetKey(KeyCode.LeftControl)) amount = 100;
         if (!selling && selectedLine != null)
         {
-            stationTradingComponent.SellTo(playerShipCargo, (RESOURCE_TYPE)selectedLine.ResourceID, (uint)amount, selectedLine.PricePerUnit);
+            stationTradingComponent.SellTo(playerShipCargo, (RESOURCE_TYPE)selectedLine.ResourceID, (uint)amount, selectedLine.PricePerUnit, true);
             RefreshTradePanels();
         }
     }

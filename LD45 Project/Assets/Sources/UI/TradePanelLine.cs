@@ -44,6 +44,7 @@ public class TradePanelLine : MonoBehaviour
 
         itemNameText.text = this.resourceType.GetDescription();
         itemAmountText.text = "x" + amount;
+        if (itemPricePerUnitText != null)
         itemPricePerUnitText.text = pricePerUnit + "$";
     }
 
