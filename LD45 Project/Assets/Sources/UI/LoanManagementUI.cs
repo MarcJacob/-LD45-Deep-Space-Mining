@@ -45,6 +45,5 @@ public class LoanManagementUI : MonoBehaviour
         string secondsFormat = "" + (int)(GameManager.GracePeriod % 60);
         if (minuteFormat.Length == 1) minuteFormat = "0" + minuteFormat;
         if (secondsFormat.Length == 1) secondsFormat = "0" + secondsFormat;
-        gracePeriodText.text = minuteFormat + " : " + secondsFormat;
     }
 }
