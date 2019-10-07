@@ -52,21 +52,21 @@ public class MiningBeam : MonoBehaviour
                 else
                 {
                     Debug.DrawLine(transform.position, shipControllerInput.CurrentPilot.targetedPosition + (Vector2)transform.position, Color.red);
-                    DeactivateMining();
+                    DeactivateEquipment();
                 }
             }
             else
             {
-                DeactivateMining();
+                DeactivateEquipment();
             }
         }
         else if (activatedLastFrame)
         {
-            DeactivateMining();
+            DeactivateEquipment();
         }
     }
     private bool activatedLastFrame = false;
-    private void DeactivateMining()
+    private void DeactivateEquipment()
     {
         for (int i = 0; i < mineBuffer.Length; i++)
             mineBuffer[i] = 0f;

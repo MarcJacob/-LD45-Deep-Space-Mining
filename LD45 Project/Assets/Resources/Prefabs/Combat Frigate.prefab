@@ -19,12 +19,11 @@ GameObject:
   - component: {fileID: -7307000458115719653}
   - component: {fileID: 3463932891983848033}
   - component: {fileID: 5768995063310366043}
-  - component: {fileID: 615020093678344560}
-  - component: {fileID: 422184482985080703}
-  - component: {fileID: -5420084757499161971}
-  - component: {fileID: 9198366645378036510}
+  - component: {fileID: 2521186419579711081}
+  - component: {fileID: 3295397774843396506}
+  - component: {fileID: 1213351742814728452}
   m_Layer: 0
-  m_Name: Ore Mining Frigate
+  m_Name: Combat Frigate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 0
   price: 5000
---- !u!114 &615020093678344560
+--- !u!114 &2521186419579711081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,29 +219,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 615020093678344330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d7a7ed17eca6944f871a8892588d9eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b4c09e38cf88c9428f6dcc3998552ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miningStrength: 20
-  range: 8
-  mineableResource: 0
-  cargo: {fileID: 615020093678344561}
---- !u!114 &422184482985080703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615020093678344330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0009de02e242b5b47a1bf4e90397f5b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetParticleFX: {fileID: 1973019750002821160, guid: cd59a338fc954e7488f60dba97bc896e,
+  projectileSpeedModifier: 1
+  projetileSizeModifier: 1
+  firingPeriod: 0.1
+  projectilePrefab: {fileID: 5095112742027845124, guid: f1b53598f5166194da5a7c2b2925e3b2,
     type: 3}
-  beamFX: {fileID: 1882328966008973207, guid: 6da02e2e5f59f24458f03302d2d979d3, type: 3}
---- !u!114 &-5420084757499161971
+--- !u!114 &3295397774843396506
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 200
---- !u!60 &9198366645378036510
+--- !u!60 &1213351742814728452
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

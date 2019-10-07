@@ -41,7 +41,6 @@ public class BeamFX : MonoBehaviour
         beamFX.SetPosition(0, transform.position);
         beamFX.SetPosition(1, Vector2.Lerp(beamFX.GetPosition(1), beamCurrentPosition, Time.deltaTime * 10f));
 
-
     }
 
     // Update position

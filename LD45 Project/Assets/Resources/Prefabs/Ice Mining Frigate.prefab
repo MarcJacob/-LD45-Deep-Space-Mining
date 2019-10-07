@@ -15,6 +15,19 @@ MonoBehaviour:
   targetParticleFX: {fileID: 1973019750002821160, guid: cd59a338fc954e7488f60dba97bc896e,
     type: 3}
   beamFX: {fileID: 1882328966008973207, guid: 6da02e2e5f59f24458f03302d2d979d3, type: 3}
+--- !u!114 &7939186982835946900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7119294951820090490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcfeef8d7af9b9d468aaa973c1028d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 200
 --- !u!1001 &7657294253677806832
 PrefabInstance:
   m_ObjectHideFlags: 0

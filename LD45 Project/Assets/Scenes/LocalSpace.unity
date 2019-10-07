@@ -1850,7 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba16d6da94b604f4e85b26841185e412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCash: 0
+  playerCash: 100000
   playerDebt: 0
   debtInterest: 0.1
   debtIncreaseCooldown: 60
@@ -1884,7 +1884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidPrefab:
   - {fileID: 3979698486411477123, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a, type: 3}
-  - {fileID: 3038262584254196200, guid: c72b7bec4116cb947911d5d2df61d8b5, type: 3}
+  - {fileID: 2094359683776358730, guid: c72b7bec4116cb947911d5d2df61d8b5, type: 3}
   spawnAsteroidsOnStart: 1
   amount: 500
   parent: {fileID: 1393836241}
@@ -3644,7 +3644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8115142}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000014695417, y: 0.00009244068}
+  m_AnchoredPosition: {x: -0.000014695417, y: 0.000024399045}
   m_SizeDelta: {x: -1.97, y: 80.32}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &637101767
@@ -7902,7 +7902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36125, y: 0.028}
   m_AnchorMax: {x: 0.6375, y: 0.124000005}
-  m_AnchoredPosition: {x: 0.5, y: -1.9007568}
+  m_AnchoredPosition: {x: 0.5, y: -1.9008789}
   m_SizeDelta: {x: 1, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1144454879
@@ -8375,7 +8375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.12630571}
   m_AnchorMax: {x: 1, y: 0.869}
-  m_AnchoredPosition: {x: 0, y: -0.23899841}
+  m_AnchoredPosition: {x: 0, y: -0.23901367}
   m_SizeDelta: {x: 0, y: -0.85699844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1220878394
@@ -8486,7 +8486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.192}
   m_AnchorMax: {x: 1, y: 0.869}
-  m_AnchoredPosition: {x: 0, y: -0.48745728}
+  m_AnchoredPosition: {x: 0, y: -0.48742676}
   m_SizeDelta: {x: 0, y: 0.055023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1223011203
@@ -12753,7 +12753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36125, y: 0.028}
   m_AnchorMax: {x: 0.6375, y: 0.124000005}
-  m_AnchoredPosition: {x: 0.5, y: -1.9007568}
+  m_AnchoredPosition: {x: 0.5, y: -1.9008789}
   m_SizeDelta: {x: 1, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2141376570
@@ -13042,29 +13042,23 @@ PrefabInstance:
     - target: {fileID: -377502095909165898, guid: 6b2fa0a76a568144aa6dbaf7b7c2f6e5,
         type: 3}
       propertyPath: potentialShips.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: -377502095909165898, guid: 6b2fa0a76a568144aa6dbaf7b7c2f6e5,
-        type: 3}
-      propertyPath: shipSpawnCooldown
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -377502095909165898, guid: 6b2fa0a76a568144aa6dbaf7b7c2f6e5,
         type: 3}
       propertyPath: potentialShips.Array.data[4]
       value: 
-      objectReference: {fileID: 7119294951820090490, guid: bd743593d2d38bf43be3a916dc164236,
+      objectReference: {fileID: 615020093678344330, guid: c335bbbdedc55c044ad6ff160229ea0a,
         type: 3}
     - target: {fileID: -377502095909165898, guid: 6b2fa0a76a568144aa6dbaf7b7c2f6e5,
         type: 3}
-      propertyPath: potentialShips.Array.data[5]
-      value: 
-      objectReference: {fileID: 7119294951820090490, guid: bd743593d2d38bf43be3a916dc164236,
-        type: 3}
+      propertyPath: shipSpawnCooldown
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8425039926269427418, guid: 6b2fa0a76a568144aa6dbaf7b7c2f6e5,
         type: 3}
       propertyPath: cargoCapacity
-      value: 100000
+      value: 1500000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b2fa0a76a568144aa6dbaf7b7c2f6e5, type: 3}
