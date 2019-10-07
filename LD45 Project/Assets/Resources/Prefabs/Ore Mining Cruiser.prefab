@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -7307000458115719653}
   - component: {fileID: 3463932891983848033}
   - component: {fileID: -1352374118708469399}
+  - component: {fileID: 3730419675638821485}
   m_Layer: 0
   m_Name: Ore Mining Cruiser
   m_TagString: Untagged
@@ -224,3 +225,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 1
   price: 10000
+--- !u!114 &3730419675638821485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615020093678344330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0009de02e242b5b47a1bf4e90397f5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetParticleFX: {fileID: 1973019750002821160, guid: cd59a338fc954e7488f60dba97bc896e,
+    type: 3}
+  beamFX: {fileID: 2661841980573324045, guid: 8abd0e6b11c25914b882b7b3c5bcd94e, type: 3}

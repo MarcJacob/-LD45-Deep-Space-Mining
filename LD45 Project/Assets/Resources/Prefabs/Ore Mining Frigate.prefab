@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3463932891983848033}
   - component: {fileID: 5768995063310366043}
   - component: {fileID: 615020093678344560}
+  - component: {fileID: 422184482985080703}
   m_Layer: 0
   m_Name: Ore Mining Frigate
   m_TagString: Untagged
@@ -224,3 +225,18 @@ MonoBehaviour:
   range: 8
   mineableResource: 0
   cargo: {fileID: 615020093678344561}
+--- !u!114 &422184482985080703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615020093678344330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0009de02e242b5b47a1bf4e90397f5b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetParticleFX: {fileID: 1973019750002821160, guid: cd59a338fc954e7488f60dba97bc896e,
+    type: 3}
+  beamFX: {fileID: 1882328966008973207, guid: 6da02e2e5f59f24458f03302d2d979d3, type: 3}
