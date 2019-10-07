@@ -14,6 +14,9 @@ public class AttackTargetOrder : AIState
         get { return target; }
     }
 
+    private ShipPiloting targetPilot;
+    private ShipEngine targetEngines;
+
     public AttackTargetOrder(GameObject ship, float attackRange) : base(ship)
     {
         this.attackRange = attackRange;
@@ -28,6 +31,8 @@ public class AttackTargetOrder : AIState
     public void AssignNewTarget(EncounterAgent target)
     {
         this.target = target;
+        targetPilot = target.GetComponent<ShipPiloting>();
+        targetEngines = target.GetComponent<ShipEngine>();
         Start();
     }
 
@@ -85,8 +90,15 @@ public class AttackTargetOrder : AIState
                 }
 
                 // SHOOOOOOOOT
+
+                Vector2 movementOffset = Vector2.zero;
+                if (targetEngines != null)
+                {
+                    movementOffset = targetEngines.MovementVector * attackRange; 
+                }
+
                 input.usingEquipment = true;
-                input.targetPosition = target.transform.position - controlledShip.transform.position;
+                input.targetPosition = target.transform.position - controlledShip.transform.position + (Vector3)movementOffset;
                 input.targetObject = target.gameObject;
             }
         }

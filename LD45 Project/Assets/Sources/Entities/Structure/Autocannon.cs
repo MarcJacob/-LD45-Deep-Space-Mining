@@ -39,6 +39,7 @@ public class Autocannon : MonoBehaviour
             {
                 currentFiringCooldown = firingPeriod;
                 FireShot(shipControllerInput.CurrentPilot.targetedPosition);
+                OnRunning(shipControllerInput.CurrentPilot.targetedPosition, null);
             }
         }
         else if (activatedLastFrame)

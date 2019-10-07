@@ -22,7 +22,6 @@ public class BeamFX : MonoBehaviour
         miningBeam.OnDeactivation += MiningBeam_OnDeactivation;
         miningBeam.OnRunning += MiningBeam_OnRunning;
 
-        targetParticleFX = Instantiate(targetParticleFX, transform);
         beamFX = Instantiate(beamFX, transform);
         fxEmission = targetParticleFX.emission;
         fxEmission.enabled = false;

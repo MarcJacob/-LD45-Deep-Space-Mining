@@ -20,6 +20,8 @@ public class ShipEngine : MonoBehaviour
     private ShipPiloting shipControllerInput;
     private Dockable dockableComponent;
 
+    public Vector2 MovementVector { get; private set; }
+
     private void Awake()
     {
         shipControllerInput = GetComponent<ShipPiloting> ();
@@ -77,8 +79,10 @@ public class ShipEngine : MonoBehaviour
         currentVelocity *= speedDragRatio >= 0f ? speedDragRatio : 0f;
         if (currentVelocity.magnitude < 0.005f && acceleration <= 0f && strafe != 0f) currentVelocity = Vector2.zero;
 
+        Vector3 oldPos = transform.position;
         transform.Rotate(0f, 0f, turn);
         transform.Translate(currentVelocity, Space.World);
+        MovementVector = currentVelocity;
     }
 
     private void OnDisable()
