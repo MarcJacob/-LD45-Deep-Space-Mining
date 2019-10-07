@@ -37,7 +37,6 @@ public class ResolveEncounterOrder : AIState
 
     private void LookForTargetInEncounter_OnStateFailed(string reason)
     {
-        Debug.LogWarning("Couldn't find target in encounter. Reason : " + reason);
     }
 
     private void OnTargetFound(EncounterAgent target)

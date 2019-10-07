@@ -238,9 +238,31 @@ public class ShipTradingUI : MonoBehaviour
 
     public void DeselectLines()
     {
+        List<ShipPanelLine> shipDestroyedLine = new List<ShipPanelLine>();
         foreach (var line in playerTradingPanelLines)
-            line.OnLineDeselected();
+        {
+            if (line.Ship != null)
+                line.OnLineDeselected();
+            else
+                shipDestroyedLine.Add(line);
+        }
+        foreach(var line in shipDestroyedLine)
+        {
+            RemoveLineFromList(playerTradingPanelLines, line);
+            Destroy(line.gameObject);
+        }
+        shipDestroyedLine.Clear();
         foreach (var line in stationTradingPanelLines)
-            line.OnLineDeselected();
+        {
+            if (line.Ship != null)
+                line.OnLineDeselected();
+            else
+                shipDestroyedLine.Add(line);
+        }
+        foreach (var line in shipDestroyedLine)
+        {
+            RemoveLineFromList(stationTradingPanelLines, line);
+            Destroy(line.gameObject);
+        }
     }
 }

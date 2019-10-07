@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1260157300211500066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2094359683776358730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724e7bbe545618141880b3c772fc268f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: aab67b47e29eacd41b01011865f0475e, type: 3}
-  - {fileID: 21300000, guid: e45cf08c493ce2245aa72ce35b3d78f1, type: 3}
-  - {fileID: 21300000, guid: 1abc888037a67724799d00899f2f7c58, type: 3}
-  - {fileID: 21300000, guid: ac91b063be222aa46b69ef06ebbcf8ec, type: 3}
-  - {fileID: 21300000, guid: b0cbc5ea00d92934d920eef0c3bfcd54, type: 3}
-  - {fileID: 21300000, guid: 4ba279b5390f4164883809f5819de715, type: 3}
 --- !u!1001 &3038262584254196169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,6 +88,52 @@ PrefabInstance:
       propertyPath: resourceType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3979698486411477135, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: amountLeft
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: aab67b47e29eacd41b01011865f0475e,
+        type: 3}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e45cf08c493ce2245aa72ce35b3d78f1,
+        type: 3}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1abc888037a67724799d00899f2f7c58,
+        type: 3}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: ac91b063be222aa46b69ef06ebbcf8ec,
+        type: 3}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: b0cbc5ea00d92934d920eef0c3bfcd54,
+        type: 3}
+    - target: {fileID: -6112541542900532073, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
+        type: 3}
+      propertyPath: sprites.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4ba279b5390f4164883809f5819de715,
+        type: 3}
     - target: {fileID: 1570727688, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a, type: 3}
       propertyPath: m_Offset.x
       value: 0.0082798
@@ -121,9 +148,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a, type: 3}
---- !u!1 &2094359683776358730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3979698486411477123, guid: 0916b6cb4b1bfc44fb86f43f8c6c207a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3038262584254196169}
-  m_PrefabAsset: {fileID: 0}

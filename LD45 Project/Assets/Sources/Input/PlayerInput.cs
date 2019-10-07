@@ -56,6 +56,11 @@ public class PlayerInput : EntityInput
         interacting = Input.GetKeyDown(KeyCode.F);
     }
 
+    private void Start()
+    {
+        OnEnable();
+    }
+
     private void OnEnable()
     {
         CurrentShip = GetComponent<ShipPiloting>();

@@ -74,7 +74,6 @@ public class AIOrderQueue
         CurrentOrder.OnStateFailed -= OnCurrentOrderFailed;
         CurrentOrder.OnStateSucceeded -= OnCurrentOrderSucceeded;
 
-        UnityEngine.Debug.Log("AI " + CurrentOrder.ControlledShip.name + " failed order of type " + CurrentOrder.GetType().ToString() + " because : " + reason);
         SwitchToNextOrder();
     }
 

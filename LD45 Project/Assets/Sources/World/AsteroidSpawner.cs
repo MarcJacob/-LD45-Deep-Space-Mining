@@ -10,12 +10,12 @@ public class AsteroidSpawner : MonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             Vector2 randPos = new Vector2(Random.Range(startX, endX), Random.Range(startY, endY)); // TODO use custom position system
-            Instantiate(Instance.asteroidPrefab, randPos, Quaternion.identity).transform.parent = Instance.parent;
+            Instantiate(Instance.asteroidPrefabs[UnityEngine.Random.Range(0, Instance.asteroidPrefabs.Length)], randPos, Quaternion.identity).transform.parent = Instance.parent;
         }
     }
 
     [SerializeField]
-    private GameObject asteroidPrefab;
+    private GameObject[] asteroidPrefabs;
     [SerializeField]
     private bool spawnAsteroidsOnStart = false;
     [SerializeField]

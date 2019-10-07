@@ -75,7 +75,7 @@ public class Dockable : MonoBehaviour
                 }
             }
 
-            if (Mathf.Sqrt(shortestRange) <= nearest.DockingRange)
+            if (nearest != null && Mathf.Sqrt(shortestRange) <= nearest.DockingRange)
             {
                 OnShipInDockingRange(nearest);
                 currentDockInteractionCandidate = nearest;

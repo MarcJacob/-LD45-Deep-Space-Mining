@@ -15,6 +15,18 @@ MonoBehaviour:
   targetParticleFX: {fileID: 1973019750002821160, guid: cd59a338fc954e7488f60dba97bc896e,
     type: 3}
   beamFX: {fileID: 1882328966008973207, guid: 6da02e2e5f59f24458f03302d2d979d3, type: 3}
+--- !u!114 &-3399701596923330124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7119294951820090490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c398bf74ea2a0c848a57b9f20d8b8588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7939186982835946900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28,18 +40,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 200
---- !u!114 &-3399701596923330124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7119294951820090490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c398bf74ea2a0c848a57b9f20d8b8588, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7657294253677806832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127,6 +127,11 @@ PrefabInstance:
         type: 3}
       propertyPath: range
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 615020093678344560, guid: 3c136b014e815294a960bf9f49f5a38f,
+        type: 3}
+      propertyPath: miningStrength
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c136b014e815294a960bf9f49f5a38f, type: 3}

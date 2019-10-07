@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 2322353446533943193, guid: 7a75c676960ad3b4793b9875b4112d85,
         type: 3}
       propertyPath: m_Name
-      value: Pirate Combat Cruiser
+      value: Pirate Combat Cruiser Variant
       objectReference: {fileID: 0}
     - target: {fileID: 706728933872564446, guid: 7a75c676960ad3b4793b9875b4112d85,
         type: 3}
@@ -67,6 +67,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2246816775991050293, guid: 7a75c676960ad3b4793b9875b4112d85,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711522199738998844, guid: 7a75c676960ad3b4793b9875b4112d85,
+        type: 3}
+      propertyPath: ownerFactionID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260976968523549928, guid: 7a75c676960ad3b4793b9875b4112d85,
+        type: 3}
+      propertyPath: currentPilot
+      value: 
+      objectReference: {fileID: 2054709092765920431}
     - target: {fileID: 8824806320605395398, guid: 7a75c676960ad3b4793b9875b4112d85,
         type: 3}
       propertyPath: m_Color.r
@@ -82,20 +97,21 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.36912602
       objectReference: {fileID: 0}
-    - target: {fileID: 7260976968523549928, guid: 7a75c676960ad3b4793b9875b4112d85,
+    - target: {fileID: 8824806320605395398, guid: 7a75c676960ad3b4793b9875b4112d85,
         type: 3}
-      propertyPath: currentPilot
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2054709092765920431}
-    - target: {fileID: 4711522199738998844, guid: 7a75c676960ad3b4793b9875b4112d85,
+      objectReference: {fileID: 21300000, guid: 2e6fab2699b3c074d8ea491ad26f9062,
         type: 3}
-      propertyPath: ownerFactionID
-      value: 2
+    - target: {fileID: 6633559071704681570, guid: 7a75c676960ad3b4793b9875b4112d85,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 7.4599996
       objectReference: {fileID: 0}
-    - target: {fileID: 2246816775991050293, guid: 7a75c676960ad3b4793b9875b4112d85,
+    - target: {fileID: 6633559071704681570, guid: 7a75c676960ad3b4793b9875b4112d85,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.450123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a75c676960ad3b4793b9875b4112d85, type: 3}
