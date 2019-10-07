@@ -115,6 +115,8 @@ public class ShipTradingUI : MonoBehaviour
         RectTransform rTransform = line.GetComponent<RectTransform>();
         rTransform.SetParent(panel);
         rTransform.anchoredPosition = new Vector2(0f, (lines.Count + 0.5f) * -lineHeight);
+        rTransform.localScale = Vector3.one;
+        rTransform.sizeDelta = Vector2.zero;
         lines.Add(line);
         panel.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, lineHeight * lines.Count);
     }
