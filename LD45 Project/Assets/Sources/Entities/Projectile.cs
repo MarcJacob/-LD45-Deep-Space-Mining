@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
 
     private void CheckForCollision()
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, hitDetectionRange);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, hitDetectionRange, ~(1000000000));
 
         foreach(var hit in hits)
         {

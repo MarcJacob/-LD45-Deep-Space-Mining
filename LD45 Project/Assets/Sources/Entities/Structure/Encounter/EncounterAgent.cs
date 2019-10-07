@@ -18,6 +18,20 @@ public class EncounterAgent : MonoBehaviour
     public event Action<Encounter> OnEncounterJoined = delegate { };
     public event Action<Encounter> OnEncounterLeft = delegate { };
 
+    public void Awake()
+    {
+        var dockableComponent = GetComponent<Dockable>();
+        if (dockableComponent != null)
+        {
+            dockableComponent.OnShipDocked += DockableComponent_OnShipDocked;
+        }
+    }
+
+    private void DockableComponent_OnShipDocked(Dock obj)
+    {
+        if (CurrentEncounter != null) CurrentEncounter.RemoveFromEncounter(this);
+    }
+
     public void StartEncounter(EncounterAgent otherAgent)
     {
         new Encounter(this, otherAgent);

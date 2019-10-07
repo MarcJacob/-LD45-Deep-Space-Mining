@@ -35,6 +35,8 @@ public class LookForTargetInEncounterOrder : AIState
         foreach (var enemy in potentialEnemies)
         {
                 float squaredDist = (controlledShip.transform.position - enemy.transform.position).sqrMagnitude;
+                Dockable dockableComponent = enemy.GetComponent<Dockable>();
+                if (dockableComponent == null || dockableComponent.Docked == false)
                 if ((closestEnemy == null || squaredDist < shortestSquaredDist))
                 {
                     closestEnemy = enemy;

@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcfeef8d7af9b9d468aaa973c1028d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 600
+  HP: 200
 --- !u!60 &4644931358500326995
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4c09e38cf88c9428f6dcc3998552ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeedModifier: 1
-  firingPeriod: 0.5
+  projectileSpeedModifier: 1.5
+  firingPeriod: 3
   projectilePrefab: {fileID: 5095112742027845124, guid: 1926770b1b4be4e4ba1963f85991051b,
     type: 3}

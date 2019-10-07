@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3979698486411477135}
   - component: {fileID: -6112541542900532073}
   - component: {fileID: 1570727688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PLACEHOLDER Iron Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

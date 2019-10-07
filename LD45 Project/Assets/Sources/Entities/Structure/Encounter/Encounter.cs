@@ -12,6 +12,7 @@ public class Encounter
     }
 
     private HashSet<EncounterAgent>[] encounterMembers = new HashSet<EncounterAgent>[Ownership.FactionCount];
+    private Vector2 epicenter;
 
     public bool EncounterOver
     {
@@ -68,12 +69,55 @@ public class Encounter
         if (nonEmptyHashsets >= 2)
         {
             // Encounter isn't over.
+            // Update epicenter
+            Vector2 sum = Vector2.zero;
+            int divider = 0;
+            foreach(var fac in encounterMembers)
+            {
+                foreach(var ship in fac)
+                {
+                    sum += (Vector2)ship.transform.position;
+                    divider++;
+                }
+            }
+            epicenter = sum / divider;
+            // Find ships in range to add to the encounter.
+            // TODO generalize to all factions.
+            var playerShipsInRange = Ownership.GetFactionMembers(1).Where(o => Vector3.Distance(o.transform.position, epicenter) < 50f);
+            var pirateShipsInRange = Ownership.GetFactionMembers(2).Where(o => Vector3.Distance(o.transform.position, epicenter) < 50f);
+            foreach(var ship in playerShipsInRange)
+            {
+                if (encounterMembers[1].Contains(ship.GetComponent<EncounterAgent>()) == false)
+                {
+                    AddToEncounter(ship.GetComponent<EncounterAgent>());
+                }
+            }
+            foreach (var ship in pirateShipsInRange)
+            {
+                if (encounterMembers[2].Contains(ship.GetComponent<EncounterAgent>()) == false)
+                {
+                    AddToEncounter(ship.GetComponent<EncounterAgent>());
+                }
+            }
         }
         else
         {
             // Encounter is over. Remove all current members.
             EndEncounter();
         }
+    }
+
+    uint[] GetFactionsPresentInEncounter()
+    {
+        List<uint> participants = new List<uint>();
+        for (uint i = 0; i < encounterMembers.Length; i++)
+        {
+            if (encounterMembers[i].Count > 0)
+            {
+                participants.Add(i);
+            }
+        }
+        return participants.ToArray();
     }
 
     public void EndEncounter()

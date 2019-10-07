@@ -32,7 +32,7 @@ public class AsteroidSpawner : MonoBehaviour
     {
         if (spawnAsteroidsOnStart)
         {
-            SpawnAsteroids(-100f, -100f, 100f, 100f, amount);
+            SpawnAsteroids(-200f, -200f, 200f, 200f, amount);
         }
     }
 }

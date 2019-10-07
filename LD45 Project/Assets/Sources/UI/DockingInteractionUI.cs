@@ -24,12 +24,17 @@ public class DockingInteractionUI : MonoBehaviour
     {
         if (startStation != null)
         {
-            PlayerShip_OnShipDocked(startStation);
-            var pos = Camera.main.transform.position;
-            pos.x = startStation.transform.position.x;
-            pos.y = startStation.transform.position.y;
-            Camera.main.transform.position = pos;
+            GoToStartStation();
         }
+    }
+
+    private void GoToStartStation()
+    {
+        PlayerShip_OnShipDocked(startStation);
+        var pos = Camera.main.transform.position;
+        pos.x = startStation.transform.position.x;
+        pos.y = startStation.transform.position.y;
+        Camera.main.transform.position = pos;
     }
 
     private void OnPlayerShipChanged(Dockable playerShip)
@@ -40,6 +45,7 @@ public class DockingInteractionUI : MonoBehaviour
             playerLastShip.OnShipOutOfDockingRange -= PlayerShip_OnShipOutOfDockingRange;
             playerLastShip.OnShipDocked -= PlayerShip_OnShipDocked;
             playerLastShip.OnShipUndocked -= PlayerShip_OnShipUndocked;
+            playerLastShip.GetComponent<Damageable>().OnDeath -= DockingInteractionUI_OnDeath; 
         }
 
         if (playerShip != null)
@@ -48,9 +54,15 @@ public class DockingInteractionUI : MonoBehaviour
             playerShip.OnShipOutOfDockingRange += PlayerShip_OnShipOutOfDockingRange;
             playerShip.OnShipDocked += PlayerShip_OnShipDocked;
             playerShip.OnShipUndocked += PlayerShip_OnShipUndocked;
+            playerShip.GetComponent<Damageable>().OnDeath += DockingInteractionUI_OnDeath;
         }
 
         playerLastShip = playerShip;
+    }
+
+    private void DockingInteractionUI_OnDeath()
+    {
+        GoToStartStation();
     }
 
     private void PlayerShip_OnShipUndocked(Dock obj)

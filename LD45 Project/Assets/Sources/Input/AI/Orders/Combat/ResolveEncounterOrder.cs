@@ -18,9 +18,9 @@ public class ResolveEncounterOrder : AIState
         this.encounterAgent.OnEncounterJoined += EncounterAgent_OnEncounterJoined;
 
         float combatRange = 10f;
-        if (ship.GetComponent<ShipProperties>().Size == SHIP_SIZE.M) combatRange = 25f;
+        if (ship.GetComponent<ShipProperties>().Size == SHIP_SIZE.M) combatRange = 40f;
 
-        attackTarget = new AttackTargetOrder(ship, 10f);
+        attackTarget = new AttackTargetOrder(ship, combatRange);
         lookForTargetInEncounter = new LookForTargetInEncounterOrder(ship, OnTargetFound);
         lookForTargetInEncounter.OnStateFailed += LookForTargetInEncounter_OnStateFailed;
     }
@@ -50,7 +50,7 @@ public class ResolveEncounterOrder : AIState
 
     public override void Start()
     {
-
+        controlledShip.GetComponent<Dockable>().Undock();
     }
 
     public override void Update()
