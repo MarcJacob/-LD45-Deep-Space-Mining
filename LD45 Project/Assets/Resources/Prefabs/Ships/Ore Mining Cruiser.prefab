@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 3730419675638821485}
   - component: {fileID: 5023743561952078939}
   - component: {fileID: 269267757}
+  - component: {fileID: 5538316376034093407}
   m_Layer: 0
   m_Name: Ore Mining Cruiser
   m_TagString: Untagged
@@ -415,3 +416,15 @@ PolygonCollider2D:
       - {x: -0.8138645, y: -2.5921204}
       - {x: -0.80876195, y: -2.5768125}
       - {x: -0.8036593, y: -2.3982215}
+--- !u!114 &5538316376034093407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615020093678344330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c398bf74ea2a0c848a57b9f20d8b8588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

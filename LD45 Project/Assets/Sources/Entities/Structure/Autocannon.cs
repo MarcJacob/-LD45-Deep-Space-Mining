@@ -8,8 +8,6 @@ public class Autocannon : MonoBehaviour
     [SerializeField]
     private float projectileSpeedModifier;
     [SerializeField]
-    private float projetileSizeModifier;
-    [SerializeField]
     private float firingPeriod;
     [SerializeField]
     private Projectile projectilePrefab; // TODO pooling

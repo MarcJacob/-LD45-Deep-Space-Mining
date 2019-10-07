@@ -32,15 +32,23 @@ public class PlayerInput : EntityInput
             Vector2 hitPoint = ray.GetPoint(dist);
             targetedPosition = hitPoint - (Vector2)transform.position;
 
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetedPosition, targetedPosition.magnitude);
-            if (hit.collider != null)
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, targetedPosition, targetedPosition.magnitude);
+            foreach(var hit in hits)
             {
-                targetedObject = hit.collider.gameObject;
+                if (hit.collider.gameObject != gameObject)
+                {
+                    if (hit.collider != null)
+                    {
+                        targetedObject = hit.collider.gameObject;
+                    }
+                    else
+                    {
+                        targetedObject = null;
+                    }
+                    break;
+                }
             }
-            else
-            {
-                targetedObject = null;
-            }
+
         }
 
 

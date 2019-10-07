@@ -1,20 +1,32 @@
 ﻿using System;
 using UnityEngine;
-public class MineAndSellAutomaticallyBehavior
-{
-    GameObject controlledShip;
-    AIOrderQueue orderQueue;
 
+public abstract class AIBehavior
+{
+    protected GameObject controlledShip;
+    protected AIOrderQueue orderQueue;
+    public AIBehavior(GameObject ship, AIOrderQueue orderQueue)
+    {
+        controlledShip = ship;
+        this.orderQueue = orderQueue;
+    }
+
+    public abstract void StartBehavior();
+    public abstract void UpdateBehavior();
+
+    public abstract void StopBehavior();
+}
+
+public class MineAndSellAutomaticallyBehavior : AIBehavior
+{
     MineNearest mineNearestOrder;
     DockAtNearestOrder dockAtNearestOrder;
     SellCargoToDockedStation sellToDockedStationOrder; // TODO make "sell cargo at nearest" which combines the two.
     UndockOrder undockOrder;
     bool ongoing = false; // Are there any orders related to this behavior currently running ?
 
-    public MineAndSellAutomaticallyBehavior(GameObject ship, AIOrderQueue orderQueue)
+    public MineAndSellAutomaticallyBehavior(GameObject ship, AIOrderQueue orderQueue) : base(ship, orderQueue)
     {
-        controlledShip = ship;
-        this.orderQueue = orderQueue;
         mineNearestOrder = new MineNearest(ship);
         dockAtNearestOrder = new DockAtNearestOrder(ship);
         sellToDockedStationOrder = new SellCargoToDockedStation(ship);
@@ -29,18 +41,18 @@ public class MineAndSellAutomaticallyBehavior
         ongoing = false;
     }
 
-    public void StartBehavior()
+    public override void StartBehavior()
     {
-        ongoing = true;
-        orderQueue.AssignOrder(mineNearestOrder);
+
     }
 
-    public void UpdateBehavior()
+    public override void UpdateBehavior()
     {
         if (ongoing == false)
         {
             if (controlledShip.GetComponent<Cargo>().IsFull && controlledShip.GetComponent<Dockable>().Docked == false)
             {
+                orderQueue.AssignOrder(undockOrder);
                 orderQueue.AssignOrder(dockAtNearestOrder);
                 orderQueue.AssignOrder(sellToDockedStationOrder);
             }
@@ -51,5 +63,10 @@ public class MineAndSellAutomaticallyBehavior
             }
             ongoing = true;
         }
+    }
+
+    public override void StopBehavior()
+    {
+        
     }
 }

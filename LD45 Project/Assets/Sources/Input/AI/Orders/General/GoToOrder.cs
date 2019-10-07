@@ -35,6 +35,11 @@ public class GoToOrder : AIState
             Fail("NO TARGET");
             return;
         }
+        var dockable = controlledShip.GetComponent<Dockable>();
+        if (dockable != null && dockable.Docked)
+        {
+            dockable.Undock();
+        }
     }
 
     public override void Update()

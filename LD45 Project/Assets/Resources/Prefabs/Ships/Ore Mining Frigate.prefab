@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 422184482985080703}
   - component: {fileID: -5420084757499161971}
   - component: {fileID: 9198366645378036510}
+  - component: {fileID: -1136460997582608442}
   m_Layer: 0
   m_Name: Ore Mining Frigate
   m_TagString: Untagged
@@ -363,3 +364,15 @@ PolygonCollider2D:
       - {x: -0.15400001, y: -0.933}
       - {x: -0.156, y: -0.69900006}
       - {x: -0.126, y: -0.72900003}
+--- !u!114 &-1136460997582608442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615020093678344330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c398bf74ea2a0c848a57b9f20d8b8588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

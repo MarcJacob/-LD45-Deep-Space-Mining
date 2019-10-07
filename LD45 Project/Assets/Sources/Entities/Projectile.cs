@@ -69,7 +69,7 @@ public class Projectile : MonoBehaviour
             if (hit.collider.gameObject != source)
             {
                 var hitOwnershipComponent = hit.collider.GetComponent<Ownership>();
-                if (hitOwnershipComponent == null || hitOwnershipComponent.OwnerFactionID == 0 || !dontHitSameFaction || hitOwnershipComponent.OwnerFactionID != source.GetComponent<Ownership>().OwnerFactionID)
+                if (hitOwnershipComponent == null || hitOwnershipComponent.OwnerFactionID == 0 || !dontHitSameFaction || (source != null && hitOwnershipComponent.OwnerFactionID != source.GetComponent<Ownership>().OwnerFactionID))
                 {
                     OnCollision(hit.collider.gameObject);
                 }
