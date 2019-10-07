@@ -67,6 +67,10 @@ public class GameManager : MonoBehaviour
     private float gracePeriod = 300f;
     [SerializeField]
     private float goalNetWorth = 100000f;
+    [SerializeField]
+    private GameObject gameOverScreen;
+    [SerializeField]
+    private GameObject victoryScreen;
 
     private float currentDebtIncreaseCooldown = 0f;
     private bool gracePeriodStarted = false;
@@ -95,6 +99,7 @@ public class GameManager : MonoBehaviour
         currentDebtIncreaseCooldown = debtIncreaseCooldown;
     }
 
+    bool victoryScreenShown = false;
     private void Update()
     {
         if (gracePeriodStarted) gracePeriod -= Time.deltaTime;
@@ -110,14 +115,15 @@ public class GameManager : MonoBehaviour
             if (gracePeriod < 0f && NetWorth < -10000f)
             {
                 Debug.Log("GameOver");
-                // TODO GameOver screen.
+                gameOverScreen.SetActive(true);
             }
         }
 
-        if (NetWorth > goalNetWorth)
+        if (!victoryScreenShown && NetWorth > goalNetWorth)
         {
             Debug.Log("Game won !");
-            // TODO Game won screen.
+            victoryScreenShown = true;
+            victoryScreen.SetActive(true);
         }
     }
 

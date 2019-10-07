@@ -63,11 +63,6 @@ public class ShipEngine : MonoBehaviour
                 acceleration = 0f;
             }
             currentVelocity += transform.up * acceleration * Time.fixedDeltaTime;
-
-            // Strafe
-            strafe = strafeAcceleration * shipControllerInput.CurrentPilot.strafingDirection;
-            currentVelocity += transform.right * strafe * Time.fixedDeltaTime;
-
             // Turning
 
             turn = turnRate * shipControllerInput.CurrentPilot.turningDirection;
