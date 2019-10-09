@@ -9,14 +9,34 @@ public class Damageable : MonoBehaviour
     public event Action OnDeath = delegate { };
     public event Action<float> OnDamageReceived = delegate { };
 
+    private void Awake()
+    {
+        var dockable = GetComponent<Dockable>();
+        dockable.OnShipDocked += Dockable_OnShipDocked;
+        dockable.OnShipUndocked += Dockable_OnShipUndocked;
+    }
+
+    private void Dockable_OnShipUndocked(Dock obj)
+    {
+        enabled = true;
+    }
+
+    private void Dockable_OnShipDocked(Dock obj)
+    {
+        enabled = false;
+    }
+
     public void Damage(float amount)
     {
-        HP -= amount;
-        OnDamageReceived(amount);
-        if (HP < 0)
+        if (enabled)
         {
-            OnDeath();
-            Destroy(gameObject);
+            HP -= amount;
+            OnDamageReceived(amount);
+            if (HP < 0)
+            {
+                OnDeath();
+                Destroy(gameObject);
+            }
         }
     }
 

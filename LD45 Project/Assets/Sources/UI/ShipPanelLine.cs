@@ -59,8 +59,11 @@ public class ShipPanelLine : MonoBehaviour
 
     private void CheckShipStatus()
     {
-        playerShip = ship.GetComponent<ShipPiloting>().PlayerControlled;
-        aiShip = ship.GetComponent<ShipPiloting>().AIControlled;
+        if (ship != null)
+        {
+            playerShip = ship.GetComponent<ShipPiloting>().PlayerControlled;
+            aiShip = ship.GetComponent<ShipPiloting>().AIControlled;
+        }
     }
 
     public void OnLineSelected()

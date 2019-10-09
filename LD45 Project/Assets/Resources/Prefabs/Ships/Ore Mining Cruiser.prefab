@@ -169,6 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ff0d293b719af43bbf4807c2bb6e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableOnDock:
+  - {fileID: 2124115257630833919}
+  enableOnUndock:
+  - {fileID: 2124115257630833919}
 --- !u!114 &615020093678344562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +497,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53295e90abb9ec94f8d36b224311ddad, type: 3}
+--- !u!1 &2124115257630833919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4410724385543529398, guid: 53295e90abb9ec94f8d36b224311ddad,
+    type: 3}
+  m_PrefabInstance: {fileID: 2327329558261079881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5081891309338413805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7406966593607554468, guid: 53295e90abb9ec94f8d36b224311ddad,

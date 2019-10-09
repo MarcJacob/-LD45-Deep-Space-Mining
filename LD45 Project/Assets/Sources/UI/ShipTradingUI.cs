@@ -147,7 +147,7 @@ public class ShipTradingUI : MonoBehaviour
 
     public void Buy()
     {
-        if (selectedLine != null)
+        if (selectedLine != null && selectedLine != null)
         {
             var ship = selectedLine.Ship;
             uint ownerID = ship.GetComponent<Ownership>() ? ship.GetComponent<Ownership>().OwnerFactionID : 0;

@@ -9,6 +9,11 @@ public class Dockable : MonoBehaviour
     public event Action<Dock> OnShipInDockingRange = delegate { };
     public event Action OnShipOutOfDockingRange = delegate { };
 
+    [SerializeField]
+    private GameObject[] disableOnDock;
+    [SerializeField]
+    private GameObject[] enableOnUndock;
+
     private Dock currentDockInteractionCandidate;
     private ShipPiloting shipControllerInput;
 
@@ -37,6 +42,10 @@ public class Dockable : MonoBehaviour
             Docked = true;
             currentDockInteractionCandidate = dock;
             OnShipDocked(dock);
+            foreach(var go in disableOnDock)
+            {
+                go.SetActive(false);
+            }
         }
         else
         {
@@ -53,6 +62,10 @@ public class Dockable : MonoBehaviour
 
             OnShipUndocked(currentDockInteractionCandidate);
             Docked = false;
+            foreach (var go in enableOnUndock)
+            {
+                go.SetActive(true);
+            }
         }
     }
 
