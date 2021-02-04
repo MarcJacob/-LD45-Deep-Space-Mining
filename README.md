@@ -17,10 +17,13 @@ partitioning system to optimize querying for close-by objects COULD work, but wo
 indefinitely. As such, I decided to go for a different strategy based on "Engagements" :
 
 (1) -> At random, using some broad, "dumb" system, find out if anyone is currently in engagement range of an enemy without being part of an engagement already
+
 (2) -> If one of the corresponding ships is already in an engagement, add the other one to that engagement. If neither are, then create a new engagement.
+
 (3) -> An Engagement keeps track of what ship is part of it, sorted by "side", where the number of sides can be 2 or above. This gives ships looking for a target a narrowed
 view of potential targets. Engagements also keep track of the average position of all ships (designated as the "Engagement Epicenter") and the average squared distance of all ships 
 to that epicenter.
+
 (4) -> When only one side remains, OR when the engagement becomes too "stretched", delete it (potentially rebuilding multiple new engagements for each "pocket" of fighting ships)
 
 With that system, the "target lookup" is optimized on a per-engagement basis rather than a purely positional basis. It could be further optimized with "sub engagements" perhaps,
