@@ -1,20 +1,25 @@
-Deep Space Mining, a game made for Ludum Dare 45 : http://ldjam.com/events/ludum-dare/45/deep-space-mining
+# Deep Space Mining
+### A game made for Ludum Dare 45 : http://ldjam.com/events/ludum-dare/45/deep-space-mining
 
 The project was originally destined to be expanded into a full blown X-style game but was discontinued after the Jam as I moved on to the next project and looking for a job.
 
 In Deep Space Mining you start with no coin, and no ship, aboard a freshly built station in the heart of a massive asteroid field. To begin you need to take a loan and use it
-to buy your first ship. All ships can be piloted by you or an AI, but purchasing the AI pilot is a non negligeable added cost early on. By mining Ore or Ice from nearby asteroids,
-you can build up your capital and keep investing more, and perhaps quickly get out of any debt if such is your preference.
+to buy your first ship. All ships can be piloted by you or an AI, but purchasing the AI pilot is a non negligeable added cost early on. By mining Ore or Ice from nearby asteroids, you can build up your capital and keep investing more, and perhaps quickly get out of any debt if such is your preference.
 
 The goal of the game is to reach a goal net worth. Careful though, as the more wealthy you become, the more of a plump target you become in the eyes of pirates.
 
+## Order Queue AI
+
 This project is one of my many projects where the game ended up being more of a shell for me to try and build some sort of advanced system of, frankly, needless complexity.
-In this case, I went pretty far with ship AI and how much it could be expanded. Each ship has a built in order queue system that could pretty easily be extended to a X-like order
-queue interface for commanding subordinate ships. 
+In this case, I went pretty far with ship AI and how much it could be expanded. Each ship has a built in order queue system that could pretty easily be extended to a X-like order queue interface for commanding subordinate ships. 
+
+Each order type corresponds to a single object type, with the ability for them to be customized rather easily. It could be improved but it makes for a particularly flexible system for development, AI configuration and possible in-game features for commanding subordinates.
 
 I also experimented with a different "looking for closest target" system for fight optimization than usual. The basic idea is that going for a "tile" / "cell" / "grid" based space
 partitioning system to optimize querying for close-by objects COULD work, but would not be adapted to a Space game where "map" sizes could extend quite far out, even maybe
-indefinitely. As such, I decided to go for a different strategy based on "Engagements" :
+indefinitely. As such, I decided to go for a different strategy based on "Engagements".
+
+## Engagements System
 
 (1) -> At random, using some broad, "dumb" system, find out if anyone is currently in engagement range of an enemy without being part of an engagement already
 
